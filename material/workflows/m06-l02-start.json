@@ -1,0 +1,123 @@
+{
+  "name": "Lab 6.2 – Start: Formular Lead-Anfrage",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Lab 6.2 · Startdatei Formular\nDas Formular „Lead-Anfrage“ mit allen neun Feldern ist fertig. Der Notion-Teil fehlt und wird im Lab selbst gebaut.\n\n**Nach dem Import**\n1. Workflow speichern, „Execute workflow“ klicken und Testanfrage T1 aus `testanfragen.md` absenden.\n2. Hinter „Lead-Anfrage“ einen Notion-Knoten „Lead in Notion anlegen“ ergänzen (Database Page → Create) und die Felder wie im Handout zuordnen.\n\nFertiger Stand zum Vergleich: `m06-l02-formular-notion.json`.",
+        "height": 340,
+        "width": 620,
+        "color": 5
+      },
+      "id": "587ff639-8df4-5618-80a6-63736a7de427",
+      "name": "Hinweis",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -80
+      ]
+    },
+    {
+      "parameters": {
+        "formTitle": "Anfrage an Nordwind Workspace",
+        "formDescription": "Übungsformular mit fiktiven Daten: nur erfundene Angaben eintragen.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Firma",
+              "placeholder": "z. B. Rheinpark Versicherungsmakler GmbH",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Website",
+              "placeholder": "https://…",
+              "requiredField": false
+            },
+            {
+              "fieldLabel": "Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Rolle",
+              "placeholder": "z. B. Office Management"
+            },
+            {
+              "fieldLabel": "E-Mail",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Mitarbeitende",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Anzahl Räume",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Region",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "DE-Nord"
+                  },
+                  {
+                    "option": "DE-West"
+                  },
+                  {
+                    "option": "DE-Süd"
+                  },
+                  {
+                    "option": "DE-Ost"
+                  },
+                  {
+                    "option": "AT"
+                  },
+                  {
+                    "option": "CH"
+                  },
+                  {
+                    "option": "NL"
+                  },
+                  {
+                    "option": "Sonstige"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Nachricht",
+              "fieldType": "textarea",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "buttonLabel": "Anfrage senden"
+        }
+      },
+      "id": "42e66adb-c3d4-53f6-908f-9f3d7bbaded7",
+      "name": "Lead-Anfrage",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "86451ac4-25be-5b15-8f56-96825614a326"
+    }
+  ],
+  "connections": {},
+  "pinData": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Berlin"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

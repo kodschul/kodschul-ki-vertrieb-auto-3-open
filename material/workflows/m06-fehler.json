@@ -1,0 +1,202 @@
+{
+  "name": "Lab 6.3 – Fehler finden",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Anfrage an Nordwind Workspace",
+        "formDescription": "Übungsformular mit fiktiven Daten: nur erfundene Angaben eintragen.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Firma",
+              "placeholder": "z. B. Rheinpark Versicherungsmakler GmbH",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Website",
+              "placeholder": "https://…",
+              "requiredField": false
+            },
+            {
+              "fieldLabel": "Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Rolle",
+              "placeholder": "z. B. Office Management"
+            },
+            {
+              "fieldLabel": "E-Mail",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Mitarbeitende",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Anzahl Räume",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Region",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "DE-Nord"
+                  },
+                  {
+                    "option": "DE-West"
+                  },
+                  {
+                    "option": "DE-Süd"
+                  },
+                  {
+                    "option": "DE-Ost"
+                  },
+                  {
+                    "option": "AT"
+                  },
+                  {
+                    "option": "CH"
+                  },
+                  {
+                    "option": "NL"
+                  },
+                  {
+                    "option": "Sonstige"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Nachricht",
+              "fieldType": "textarea",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "buttonLabel": "Anfrage senden"
+        }
+      },
+      "id": "081a0b1b-028d-5e39-992f-dba71181d537",
+      "name": "Lead-Anfrage",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "4c99a6d7-889a-5ea1-955a-c78c7696aef9"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "create",
+        "dataSourceId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "HIER-DATENBANK-AUSWAEHLEN",
+          "cachedResultName": "HIER-DATENBANK-AUSWAEHLEN (Leads)"
+        },
+        "title": "={{ $json.Firma }}",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Website|url",
+              "urlValue": "={{ $json.Website }}",
+              "ignoreIfEmpty": true
+            },
+            {
+              "key": "Ansprechperson|rich_text",
+              "textContent": "={{ $json.Name }}"
+            },
+            {
+              "key": "Rolle|rich_text",
+              "textContent": "={{ $json.Rolle }}"
+            },
+            {
+              "key": "E-Mail|email",
+              "emailValue": "={{ $json['E-Mail'] }}"
+            },
+            {
+              "key": "Mitarbeitende|number",
+              "numberValue": "={{ $json.Mitarbeitende }}"
+            },
+            {
+              "key": "Anzahl Räume|number",
+              "numberValue": "={{ $json['Anzahl Räume'] }}"
+            },
+            {
+              "key": "Region|select",
+              "selectValue": "={{ $json.Region }}"
+            },
+            {
+              "key": "Nachricht|rich_text",
+              "textContent": "={{ $json.Nachricht }}"
+            },
+            {
+              "key": "Quelle|select",
+              "selectValue": "Website"
+            },
+            {
+              "key": "Status|select",
+              "selectValue": "Neu"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f97fdd18-f914-5180-bd7a-acab97c9e980",
+      "name": "Lead in Notion anlegen",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 3,
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Lab 6.3 · Fehler lesen und beheben\nDieser Workflow enthält absichtlich einen Fehler: Formular-Anfragen kommen nicht in Notion an.\n\n**Nach dem Import einstellen**\n1. In „Lead in Notion anlegen“ die Notion-Verbindung wählen und unter „Data Source“ die Datenbank „Leads“ statt HIER-DATENBANK-AUSWAEHLEN.\n2. Workflow ausführen, eine Testanfrage absenden und die rote Fehlermeldung im Knoten „Lead in Notion anlegen“ lesen.\n3. Die genannte Eigenschaft mit der Notion-Datenbank vergleichen, korrigieren und erneut testen.",
+        "height": 340,
+        "width": 620,
+        "color": 3
+      },
+      "id": "3ec03a9f-9b33-5531-9a52-e4431c6f9929",
+      "name": "Hinweis",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -100
+      ]
+    }
+  ],
+  "connections": {
+    "Lead-Anfrage": {
+      "main": [
+        [
+          {
+            "node": "Lead in Notion anlegen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Berlin"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

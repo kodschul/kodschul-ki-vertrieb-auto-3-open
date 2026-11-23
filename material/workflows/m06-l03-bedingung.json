@@ -1,0 +1,324 @@
+{
+  "name": "Lab 6.3 – Bedingung Region",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Anfrage an Nordwind Workspace",
+        "formDescription": "Übungsformular mit fiktiven Daten: nur erfundene Angaben eintragen.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Firma",
+              "placeholder": "z. B. Rheinpark Versicherungsmakler GmbH",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Website",
+              "placeholder": "https://…",
+              "requiredField": false
+            },
+            {
+              "fieldLabel": "Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Rolle",
+              "placeholder": "z. B. Office Management"
+            },
+            {
+              "fieldLabel": "E-Mail",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Mitarbeitende",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Anzahl Räume",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Region",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "DE-Nord"
+                  },
+                  {
+                    "option": "DE-West"
+                  },
+                  {
+                    "option": "DE-Süd"
+                  },
+                  {
+                    "option": "DE-Ost"
+                  },
+                  {
+                    "option": "AT"
+                  },
+                  {
+                    "option": "CH"
+                  },
+                  {
+                    "option": "NL"
+                  },
+                  {
+                    "option": "Sonstige"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Nachricht",
+              "fieldType": "textarea",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "buttonLabel": "Anfrage senden"
+        }
+      },
+      "id": "33faf2e3-a866-5625-a659-207acc6610a3",
+      "name": "Lead-Anfrage",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "2fd0c59f-d00e-5959-8e4e-a3d1d3d92412"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "d105c42e-1a09-58fd-b040-1576d421cd85",
+              "leftValue": "={{ $json.Region }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              },
+              "rightValue": "Sonstige"
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "1bfc84d7-afd5-5a0b-8067-51a90d402992",
+      "name": "Region außerhalb DACH/NL?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        280,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9a50780a-072d-5fda-87fc-315f36caceac",
+              "name": "Status",
+              "value": "Prüfen",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "ec5b3a2e-75f2-514f-a9e4-e0904c7541c2",
+      "name": "Status Prüfen",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        560,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "12384eaf-d0de-544a-929f-9265029328d7",
+              "name": "Status",
+              "value": "Neu",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "149bd623-601e-5f9c-8bda-bd09415dba29",
+      "name": "Status Neu",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        560,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "create",
+        "dataSourceId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "HIER-DATENBANK-AUSWAEHLEN",
+          "cachedResultName": "HIER-DATENBANK-AUSWAEHLEN (Leads)"
+        },
+        "title": "={{ $json.Firma }}",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Website|url",
+              "urlValue": "={{ $json.Website }}",
+              "ignoreIfEmpty": true
+            },
+            {
+              "key": "Ansprechperson|rich_text",
+              "textContent": "={{ $json.Name }}"
+            },
+            {
+              "key": "Rolle|rich_text",
+              "textContent": "={{ $json.Rolle }}"
+            },
+            {
+              "key": "E-Mail|email",
+              "emailValue": "={{ $json['E-Mail'] }}"
+            },
+            {
+              "key": "Mitarbeitende|number",
+              "numberValue": "={{ $json.Mitarbeitende }}"
+            },
+            {
+              "key": "Räume|number",
+              "numberValue": "={{ $json['Anzahl Räume'] }}"
+            },
+            {
+              "key": "Region|select",
+              "selectValue": "={{ $json.Region }}"
+            },
+            {
+              "key": "Nachricht|rich_text",
+              "textContent": "={{ $json.Nachricht }}"
+            },
+            {
+              "key": "Quelle|select",
+              "selectValue": "Website"
+            },
+            {
+              "key": "Status|select",
+              "selectValue": "={{ $json.Status }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1491e0d9-80a0-5baf-b372-4c6392c83b06",
+      "name": "Lead in Notion anlegen",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 3,
+      "position": [
+        840,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Lab 6.3 · Bedingung Region\nAnfragen mit Region „Sonstige“ (außerhalb DACH und NL) bekommen Status „Prüfen“, alle anderen Status „Neu“. „Felder bearbeiten“ setzt dafür das Feld Status, Notion übernimmt es.\n\n**Nach dem Import einstellen**\n1. In „Lead in Notion anlegen“ die Notion-Verbindung wählen und unter „Data Source“ die Datenbank „Leads“ statt HIER-DATENBANK-AUSWAEHLEN.\n2. Testen: Workflow ausführen und eine Testanfrage aus `testanfragen.md` absenden. Einmal mit Region „Sonstige“ testen.",
+        "height": 340,
+        "width": 700,
+        "color": 5
+      },
+      "id": "7a4734c3-3f5b-5011-a6ac-a7d22d678989",
+      "name": "Hinweis",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -200
+      ]
+    }
+  ],
+  "connections": {
+    "Lead-Anfrage": {
+      "main": [
+        [
+          {
+            "node": "Region außerhalb DACH/NL?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Region außerhalb DACH/NL?": {
+      "main": [
+        [
+          {
+            "node": "Status Prüfen",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Status Neu",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Status Prüfen": {
+      "main": [
+        [
+          {
+            "node": "Lead in Notion anlegen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Status Neu": {
+      "main": [
+        [
+          {
+            "node": "Lead in Notion anlegen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Berlin"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

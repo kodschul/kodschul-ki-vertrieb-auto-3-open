@@ -1,0 +1,78 @@
+{
+  "name": "Fehler-Workflow (Lab 9.3)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "8f234b71-0a26-55ed-a5f8-52e00af37064",
+      "name": "Bei Fehler",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "page",
+        "operation": "create",
+        "pageId": {
+          "__rl": true,
+          "mode": "url",
+          "value": "HIER-LINK-ZUR-SEITE-NORDWIND-CRM-EINFUEGEN"
+        },
+        "title": "=Fehler {{ $json.workflow.name }} {{ $now.toFormat('dd.MM.yyyy HH:mm') }}",
+        "contentType": "markdown",
+        "markdown": "=**Workflow:** {{ $json.workflow.name }}\n\n**Letzter Knoten:** {{ $json.execution.lastNodeExecuted }}\n\n**Fehlermeldung:** {{ $json.execution.error.message }}\n\n**Ausführung:** {{ $json.execution.url }}\n\nDie verantwortliche Person prüft den Fehler, behebt die Ursache und startet die Ausführung erneut.",
+        "options": {}
+      },
+      "id": "caca5ea8-d566-5f27-9c6b-04a32b1cf4fe",
+      "name": "Fehler in Notion melden",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 3,
+      "position": [
+        280,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Lab 9.3 · Fehler-Workflow\nSchlägt ein überwachter Workflow fehl, startet dieser Workflow und legt unter „Nordwind CRM“ eine Seite „Fehler <Workflow> <Zeit>“ mit Fehlermeldung und Link zur Ausführung an.\n\n**Nach dem Import einstellen**\n1. In „Fehler in Notion melden“ die Notion-Verbindung wählen und unter Parent Page den Link zur Seite „Nordwind CRM“ einfügen.\n2. Speichern. In jedem zu überwachenden Workflow unter Settings → Error Workflow diesen Workflow auswählen (Bezeichnung je nach Version).\n3. Fehler auslösen: in Notion die Verbindung der Datenbank „Leads“ entfernen und eine Testanfrage senden.",
+        "height": 420,
+        "width": 640,
+        "color": 3
+      },
+      "id": "54b6f569-e430-5046-8b46-01df8db3c18e",
+      "name": "Hinweis",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -180
+      ]
+    }
+  ],
+  "connections": {
+    "Bei Fehler": {
+      "main": [
+        [
+          {
+            "node": "Fehler in Notion melden",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Berlin"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

@@ -1,0 +1,390 @@
+{
+  "name": "Lab 7.1 – KI-Zusammenfassung",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Anfrage an Nordwind Workspace",
+        "formDescription": "Übungsformular mit fiktiven Daten: nur erfundene Angaben eintragen.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Firma",
+              "placeholder": "z. B. Rheinpark Versicherungsmakler GmbH",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Website",
+              "placeholder": "https://…",
+              "requiredField": false
+            },
+            {
+              "fieldLabel": "Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Rolle",
+              "placeholder": "z. B. Office Management"
+            },
+            {
+              "fieldLabel": "E-Mail",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Mitarbeitende",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Anzahl Räume",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Region",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "DE-Nord"
+                  },
+                  {
+                    "option": "DE-West"
+                  },
+                  {
+                    "option": "DE-Süd"
+                  },
+                  {
+                    "option": "DE-Ost"
+                  },
+                  {
+                    "option": "AT"
+                  },
+                  {
+                    "option": "CH"
+                  },
+                  {
+                    "option": "NL"
+                  },
+                  {
+                    "option": "Sonstige"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Nachricht",
+              "fieldType": "textarea",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "buttonLabel": "Anfrage senden"
+        }
+      },
+      "id": "56673e64-bd6c-5384-bac4-6cb159ccccb4",
+      "name": "Lead-Anfrage",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "ed05718e-dc38-525f-9625-6237ec13c92e"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Firma: {{ $json.Firma }}\nMitarbeitende: {{ $json.Mitarbeitende }}\nAnzahl Räume: {{ $json['Anzahl Räume'] }}\nRegion: {{ $json.Region }}\nNachricht: {{ $json.Nachricht }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Du bist Assistenz im Vertriebsinnendienst von Nordwind Workspace GmbH (Raumdisplays, Konferenzkamera-Sets und Raumbuchungs-Software für Besprechungsräume).\n\nAufgabe: Fasse eine Website-Anfrage in genau einem deutschen Satz mit höchstens 25 Wörtern zusammen.\n\nRegeln:\n- Nenne Firma, Anliegen und, falls angegeben, Anzahl der Räume und Zeitrahmen.\n- Nur Angaben aus der Anfrage, nichts erfinden.\n- Gib nur den Satz aus, ohne Einleitung und ohne Anführungszeichen."
+            }
+          ]
+        }
+      },
+      "id": "001365b8-9f12-53c2-8b90-3b881922903b",
+      "name": "Anfrage zusammenfassen",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        280,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini",
+          "cachedResultName": "gpt-5-mini"
+        },
+        "options": {}
+      },
+      "id": "3279b866-365a-5ad0-a287-09b12cb1a670",
+      "name": "KI-Modell Zusammenfassung",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        300,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "39fcffe1-d2aa-51e2-aa25-a7760e6e5e5c",
+              "leftValue": "={{ $('Lead-Anfrage').item.json.Region }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              },
+              "rightValue": "Sonstige"
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "4d4a6d54-7bcb-5c11-940f-7c7c0e7f5926",
+      "name": "Region außerhalb DACH/NL?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        560,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "da543225-6804-5ab2-8e2a-987284abaea7",
+              "name": "Status",
+              "value": "Prüfen",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "6b9e1113-b39b-58b4-a079-ee30d3db9693",
+      "name": "Status Prüfen",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        840,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7ec3ff84-af09-55fa-aab3-576a5e518ad1",
+              "name": "Status",
+              "value": "Neu",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "6f83cd9d-cc10-508a-a6d8-f608f59f9ac5",
+      "name": "Status Neu",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        840,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "create",
+        "dataSourceId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "HIER-DATENBANK-AUSWAEHLEN",
+          "cachedResultName": "HIER-DATENBANK-AUSWAEHLEN (Leads)"
+        },
+        "title": "={{ $('Lead-Anfrage').item.json.Firma }}",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Website|url",
+              "urlValue": "={{ $('Lead-Anfrage').item.json.Website }}",
+              "ignoreIfEmpty": true
+            },
+            {
+              "key": "Ansprechperson|rich_text",
+              "textContent": "={{ $('Lead-Anfrage').item.json.Name }}"
+            },
+            {
+              "key": "Rolle|rich_text",
+              "textContent": "={{ $('Lead-Anfrage').item.json.Rolle }}"
+            },
+            {
+              "key": "E-Mail|email",
+              "emailValue": "={{ $('Lead-Anfrage').item.json['E-Mail'] }}"
+            },
+            {
+              "key": "Mitarbeitende|number",
+              "numberValue": "={{ $('Lead-Anfrage').item.json.Mitarbeitende }}"
+            },
+            {
+              "key": "Räume|number",
+              "numberValue": "={{ $('Lead-Anfrage').item.json['Anzahl Räume'] }}"
+            },
+            {
+              "key": "Region|select",
+              "selectValue": "={{ $('Lead-Anfrage').item.json.Region }}"
+            },
+            {
+              "key": "Nachricht|rich_text",
+              "textContent": "={{ $('Lead-Anfrage').item.json.Nachricht }}"
+            },
+            {
+              "key": "Quelle|select",
+              "selectValue": "Website"
+            },
+            {
+              "key": "Status|select",
+              "selectValue": "={{ $json.Status }}"
+            },
+            {
+              "key": "Zusammenfassung|rich_text",
+              "textContent": "={{ $('Anfrage zusammenfassen').item.json.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a90ffd20-5b2a-52a3-b091-478030eb4aac",
+      "name": "Lead in Notion anlegen",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 3,
+      "position": [
+        1120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Lab 7.1 · Ein KI-Schritt im Workflow\n„Anfrage zusammenfassen“ (Basic LLM Chain) fasst die Nachricht in einem Satz zusammen; der Satz landet im Notion-Feld „Zusammenfassung“. Region und Status wie in Lab 6.3.\n\n**Nach dem Import einstellen**\n1. In „Lead in Notion anlegen“ die Notion-Verbindung wählen und unter „Data Source“ die Datenbank „Leads“ statt HIER-DATENBANK-AUSWAEHLEN.\n2. In jedem KI-Modell-Knoten „Use Gateway credits“ oder eine eigene Verbindung (API-Schlüssel) wählen.\n3. Testen: Workflow ausführen und eine Testanfrage aus `testanfragen.md` absenden.",
+        "height": 340,
+        "width": 760,
+        "color": 5
+      },
+      "id": "beab94d9-4047-570a-84d0-367aade1a7dd",
+      "name": "Hinweis",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -200
+      ]
+    }
+  ],
+  "connections": {
+    "KI-Modell Zusammenfassung": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Anfrage zusammenfassen",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lead-Anfrage": {
+      "main": [
+        [
+          {
+            "node": "Anfrage zusammenfassen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anfrage zusammenfassen": {
+      "main": [
+        [
+          {
+            "node": "Region außerhalb DACH/NL?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Region außerhalb DACH/NL?": {
+      "main": [
+        [
+          {
+            "node": "Status Prüfen",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Status Neu",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Status Prüfen": {
+      "main": [
+        [
+          {
+            "node": "Lead in Notion anlegen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Status Neu": {
+      "main": [
+        [
+          {
+            "node": "Lead in Notion anlegen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Berlin"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

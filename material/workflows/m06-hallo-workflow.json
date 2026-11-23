@@ -1,0 +1,153 @@
+{
+  "name": "Lab 6.1 – Hallo Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "f39b99bb-7b87-5031-8c02-9d42310df379",
+      "name": "Workflow starten",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "47db94ef-cf82-583c-8064-b04e18be15fd",
+              "name": "Firma",
+              "value": "Rheinpark Versicherungsmakler GmbH",
+              "type": "string"
+            },
+            {
+              "id": "a345a34f-ac55-55a3-996d-13e7ca2d027f",
+              "name": "Website",
+              "value": "https://rheinpark-makler.example",
+              "type": "string"
+            },
+            {
+              "id": "5b3059c2-67b0-5b34-8e74-56dc1328e46d",
+              "name": "Region",
+              "value": "DE-West",
+              "type": "string"
+            },
+            {
+              "id": "4f316495-9b82-5af1-a62c-1e9b66b67b00",
+              "name": "Mitarbeitende",
+              "value": 120,
+              "type": "number"
+            },
+            {
+              "id": "4672977c-e57b-5e00-a232-0fcd9ec04c0f",
+              "name": "Anzahl Räume",
+              "value": 12,
+              "type": "number"
+            },
+            {
+              "id": "39d86131-28fb-51ab-b789-5308fca803ba",
+              "name": "Nachricht",
+              "value": "Bei uns gibt es ständig Doppelbuchungen in den Besprechungsräumen. Wir suchen eine Lösung mit Raumdisplays.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "daf0dee4-09ce-564d-a18d-1dcb982ecfe0",
+      "name": "Beispiel-Lead",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        260,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "8354c996-cc58-552c-b29b-f1bf2b39d235",
+              "leftValue": "={{ $json['Anzahl Räume'] }}",
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              },
+              "rightValue": 5
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "1dbd5930-6df7-59f0-86d7-553d210b9285",
+      "name": "Mindestens 5 Räume?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        520,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Lab 6.1 · Hallo Workflow\nDer Auslöser startet den Workflow per Klick, „Beispiel-Lead“ legt einen fiktiven Lead an, „Mindestens 5 Räume?“ prüft eine Bedingung und gibt den Lead am Ausgang true oder false aus.\n\n**Ausprobieren:** Workflow ausführen, danach jeden Knoten doppelt anklicken und Eingabe und Ausgabe ansehen. Keine Verbindung und keine Credits nötig.",
+        "height": 300,
+        "width": 640,
+        "color": 5
+      },
+      "id": "6e27857e-a456-5514-b1f4-43014b839439",
+      "name": "Hinweis",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -60
+      ]
+    }
+  ],
+  "connections": {
+    "Workflow starten": {
+      "main": [
+        [
+          {
+            "node": "Beispiel-Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Beispiel-Lead": {
+      "main": [
+        [
+          {
+            "node": "Mindestens 5 Räume?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Berlin"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

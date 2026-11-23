@@ -1,0 +1,206 @@
+{
+  "name": "Showcase – Angebote nachfassen (Lab 12.2)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "weeksInterval": 1,
+              "triggerAtDay": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "id": "43bac790-458b-59fc-b213-28ff57cbb1ac",
+      "name": "Werktags um 9 Uhr",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "getAll",
+        "dataSourceId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "HIER-DATENBANK-AUSWAEHLEN",
+          "cachedResultName": "HIER-DATENBANK-AUSWAEHLEN (Deals)"
+        },
+        "returnAll": true,
+        "filterType": "manual",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "key": "Phase|select",
+              "condition": "equals",
+              "optionValue": "Angebot versendet"
+            },
+            {
+              "key": "Letzter Kontakt|date",
+              "condition": "before",
+              "dateValue": "2026-11-24"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "299f15be-58fd-50ad-b41d-dbc4eb4c1c6e",
+      "name": "Offene Angebote abrufen",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 3,
+      "position": [
+        260,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Deal: {{ $json.property_deal }}\nFirma: {{ $json.property_firma }}\nProdukte: {{ $json.property_produkte }}\nWert: {{ $json.property_wert }} Euro\nLetzter Kontakt: {{ $json.property_letzter_kontakt.start }}\nVerantwortlich: {{ $json.property_verantwortlich }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Du schreibst Nachfass-Mails zu Angeboten von Nordwind Workspace GmbH, auf die seit mehr als einer Woche keine Reaktion kam. Stichtag der Übungsdaten ist der 01.12.2026.\n\nRegeln:\n- Sie-Form, freundlich, höchstens 90 Wörter, Anrede „Guten Tag,“.\n- Bezug auf das Angebot und die Produkte aus den Daten; eine offene Frage stellen und ein 15-minütiges Telefonat zur Klärung anbieten.\n- Kein Druck, keine künstliche Dringlichkeit, keine neuen Rabatte, Preise oder Liefertermine.\n- Gruß: „Viele Grüße“, danach die verantwortliche Person aus den Daten und „Nordwind Workspace“.\n- Gib nur den Mailtext aus."
+            }
+          ]
+        }
+      },
+      "id": "cbdd3c3c-64c6-55af-b8a7-ada9902bfb1f",
+      "name": "Nachfass-Entwurf schreiben",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        520,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini",
+          "cachedResultName": "gpt-5-mini"
+        },
+        "options": {}
+      },
+      "id": "c42f2585-11bf-5135-a702-da67c972eb71",
+      "name": "KI-Modell Nachfassen",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        540,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "page",
+        "operation": "create",
+        "pageId": {
+          "__rl": true,
+          "mode": "url",
+          "value": "HIER-LINK-ZUR-SEITE-NORDWIND-CRM-EINFUEGEN"
+        },
+        "title": "=Nachfassen: {{ $('Offene Angebote abrufen').item.json.property_deal }}",
+        "contentType": "markdown",
+        "markdown": "=**Freigabe:** Freigabe offen\n\n**Firma:** {{ $('Offene Angebote abrufen').item.json.property_firma }}\n\n**Letzter Kontakt:** {{ $('Offene Angebote abrufen').item.json.property_letzter_kontakt.start }}\n\n**Verantwortlich:** {{ $('Offene Angebote abrufen').item.json.property_verantwortlich }}\n\n---\n\n{{ $json.text }}",
+        "options": {}
+      },
+      "id": "f2272ce3-ef11-5d34-a4dd-5bf938f4d8d8",
+      "name": "Entwurf in Notion ablegen",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 3,
+      "position": [
+        780,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Lab 12.2 · Showcase: Angebote nachfassen\nBeispiel für das Ergebnis der Kette beim Nordwind-Problem „Angebote werden nicht nachgefasst“: werktags um 9 Uhr alle Deals in Phase „Angebot versendet“ mit letztem Kontakt vor dem 24.11.2026 (7 Tage vor dem Stichtag 01.12.2026) holen, je Deal einen Nachfass-Entwurf schreiben und als Seite mit „Freigabe offen“ unter „Nordwind CRM“ ablegen.\n\n**Nach dem Import einstellen**\n1. In beiden Notion-Knoten die Notion-Verbindung wählen; Datenbank „Deals“ und Link zur Seite „Nordwind CRM“ eintragen.\n2. In jedem KI-Modell-Knoten „Use Gateway credits“ oder eine eigene Verbindung (API-Schlüssel) wählen.\n3. Im echten Einsatz statt des festen Datums `{{ $now.minus({ days: 7 }).toISODate() }}` als Datum im Filter verwenden.",
+        "height": 420,
+        "width": 900,
+        "color": 5
+      },
+      "id": "1e1087fa-8e36-5f8a-881a-2ac01abd4b86",
+      "name": "Hinweis",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -180
+      ]
+    }
+  ],
+  "connections": {
+    "KI-Modell Nachfassen": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Nachfass-Entwurf schreiben",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Werktags um 9 Uhr": {
+      "main": [
+        [
+          {
+            "node": "Offene Angebote abrufen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Offene Angebote abrufen": {
+      "main": [
+        [
+          {
+            "node": "Nachfass-Entwurf schreiben",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nachfass-Entwurf schreiben": {
+      "main": [
+        [
+          {
+            "node": "Entwurf in Notion ablegen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Berlin"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
