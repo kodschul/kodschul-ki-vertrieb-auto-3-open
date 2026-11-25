@@ -85,13 +85,13 @@ _Quelle: Wikimedia Commons, „EU-LABEL AI GENERATED black.svg“ (https://commo
 
 | Status | Inhalt | Datum |
 | --- | --- | --- |
-| beschlossen, in Kraft | Digital Omnibus zur KI, Verordnung (EU) 2026/1744: Hochrisiko-Pflichten Anhang III auf 02.12.2027, Anhang I auf 02.08.2028 verschoben; Art. 4 vereinfacht; Übergangsfrist für Art. 50 Abs. 2 bis 02.12.2026; neues Verbot von „Nudify“-Apps ab Dezember 2026 | in Kraft seit 27.07.2026 |
+| beschlossen, in Kraft | Digital Omnibus zur KI, Verordnung (EU) 2026/1744: Hochrisiko-Pflichten Anhang III auf 02.12.2027, Anhang I auf 02.08.2028 verschoben; Art. 4 vereinfacht; Übergangsfrist für Art. 50 Abs. 2 bis 02.12.2026; neue Verbote für KI-erzeugte intime Bilder ohne Einwilligung („Nudify“-Apps) und Missbrauchsdarstellungen von Kindern ab 02.12.2026 | in Kraft seit 27.07.2026 |
 | unverändert in Kraft | Transparenzpflichten Art. 50 | seit 02.08.2026 |
 | veröffentlicht, freiwillig | Verhaltenskodex zur Kennzeichnung KI-erzeugter Inhalte (Anbieter: Markierung; Betreiber: Deepfakes und Texte), rund 190 Unterzeichner bis Ende Juli 2026 | final veröffentlicht 10.06.2026 |
 | veröffentlicht | Leitlinien der Kommission zu den Transparenzpflichten | 20.07.2026 |
 | nur vorgeschlagen | Digital Omnibus zu Daten mit Änderungen an der DSGVO (u. a. Art. 22) | Vorschlag 19.11.2025, Verfahren läuft |
 
-_Quellen: Verordnung (EU) 2024/1689 (https://eur-lex.europa.eu/eli/reg/2024/1689/oj); Verordnung (EU) 2026/1744 (https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=OJ:L_202601744); Europäische Kommission, „AI Act“, Stand 19.10.2026 (https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai); „AI Omnibus enters into force“, 27.07.2026 (https://digital-strategy.ec.europa.eu/en/news/ai-omnibus-enters-force); „Code of Practice on marking and labelling of AI-generated content“, Stand 19.10.2026 (https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content); Goodwin, „Not Delayed, Not Deferred: EU AI Act Transparency Obligations Are Now in Force“, 03.08.2026 (https://www.goodwinlaw.com/en/insights/publications/2026/08/alerts-technology-dpc-eu-ai-act-transparency-obligations-now-in-force); alle abgerufen am 22.11.2026._
+_Quellen: Verordnung (EU) 2024/1689 (https://eur-lex.europa.eu/eli/reg/2024/1689/oj); Verordnung (EU) 2026/1744, Amtsblatt vom 24.07.2026 (https://eur-lex.europa.eu/eli/reg/2026/1744/oj); Europäische Kommission, „AI Act“, Stand 19.10.2026 (https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai); „AI Omnibus enters into force“, 27.07.2026 (https://digital-strategy.ec.europa.eu/en/news/ai-omnibus-enters-force); „Code of Practice on marking and labelling of AI-generated content“, Stand 19.10.2026 (https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content); Goodwin, „Not Delayed, Not Deferred: EU AI Act Transparency Obligations Are Now in Force“, 03.08.2026 (https://www.goodwinlaw.com/en/insights/publications/2026/08/alerts-technology-dpc-eu-ai-act-transparency-obligations-now-in-force); alle abgerufen am 22.11.2026._
 
 ## Übung: Workflows prüfen und Transparenzhinweis setzen
 

@@ -73,6 +73,7 @@ Jedes Lab ist eine Seite mit Theorie, Übung und aufklappbarem Musterergebnis. A
 - **Workflow hängt:** Musterworkflow des Labs aus [`material/workflows/`](material/workflows/) importieren.
 - **Prompts kopieren:** alle Prompt-Karten in [`material/prompt-karten.md`](material/prompt-karten.md), die drei Assistenten in [`material/assistenten-prompts.md`](material/assistenten-prompts.md).
 - **Nachschlagen:** [Glossar](00-glossar.md), [Spickzettel](00-spickzettel.md).
+- **Übungskurs zum Wiederholen:** [`uebungen/`](uebungen/README.md) – Skill schreiben, Notion per MCP mit dem KI-Assistenten verbinden, Workflow im Notion-CRM; je Übung geführte Schritte und Musterlösung.
 
 ---
 

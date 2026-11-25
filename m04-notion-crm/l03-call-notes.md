@@ -119,7 +119,7 @@ Im Feld [Feld] stimmt etwas nicht mit der Notiz überein: [Abweichung]. Korrigie
 <details>
 <summary>Musterergebnis anzeigen</summary>
 
-Beispiel aus ChatGPT – KI-Antworten fallen jedes Mal etwas anders aus.
+Stand: 23.11.2026. Beispiel aus ChatGPT – KI-Antworten fallen jedes Mal etwas anders aus.
 
 **1. Anonymisierte Notiz (Auszug)**
 
@@ -154,7 +154,7 @@ Korrigiert mit 4.3b: Im ersten Entwurf stand unter Zeitrahmen „Lieferung Mitte
 | Budget | Kein Budget genannt. Hr. Albers wünscht 10 % Rabatt auf alles – nicht zugesagt. Einwand: „RaumPilot ist viel billiger“. |
 | Nächster Schritt | Angebot bis 04.12.2026 · Demo im Showroom Köln mit Fr. Yilmaz und Hr. Brandt vorschlagen · Logistik wegen Mitte Dezember fragen · AVV-Vorlage klären · Wiedervorlage 07.12.2026 |
 
-`Bedarf` und `Zeitrahmen` wie in der Tabelle oben. Telefonnummer und Mailadresse stehen nur in den Kontaktfeldern des CRM, nicht in den Notizfeldern.
+`Bedarf` und `Zeitrahmen` wie in der Tabelle oben. Die Mailadresse steht nur in der Eigenschaft `E-Mail` (seit dem Import gefüllt), nicht in den Notizfeldern; für die Telefonnummer hat `Leads` keine Eigenschaft, sie bleibt aus Notion draußen.
 
 Warum gut: Rabatt und Liefertermin sind als Wunsch festgehalten, nicht als Zusage; die fehlende IT-Leitung ist sichtbar, und jeder nächste Schritt hat ein Datum.
 

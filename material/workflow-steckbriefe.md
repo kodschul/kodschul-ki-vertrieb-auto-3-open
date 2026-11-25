@@ -13,7 +13,7 @@ Stand der Dienste und Speicherorte: 22.11.2026, Quellen in [Lab 11.1](../m11-leg
 | Automatisierung | n8n Cloud (Auftragsverarbeiter mit AVV) | Microsoft Azure in der EU |
 | KI-Modell | über n8n Gateway credits, Modell gpt-5-mini (OpenAI); OpenAI ist Unterauftragsverarbeiter von n8n | USA |
 | CRM | Notion, Arbeitsbereich „Nordwind CRM“ mit den Datenbanken `Leads` und `Deals` | USA (Standard), EU nur im Enterprise-Tarif |
-| Ausführungsprotokolle | n8n speichert Eingaben und Ausgaben jedes Knotens je Ausführung | n8n Cloud, Löschung je Tarif nach 7 bis 30 Tagen |
+| Ausführungsprotokolle | n8n speichert Eingaben und Ausgaben jedes Knotens je Ausführung | n8n Cloud, aufbewahrt je Tarif 7 Tage (Starter) oder 30 Tage (Pro), Enterprise unbegrenzt |
 
 Kein Workflow versendet Mails. Entwürfe landen in Notion und werden von einem Menschen geprüft.
 
@@ -31,8 +31,8 @@ Kein Workflow versendet Mails. Entwürfe landen in Notion und werden von einem M
 | KI-Schritt 2 | „Anfrage zusammenfassen“ (Basic LLM Chain): bekommt Firma, Mitarbeitende, Anzahl Räume, Region, Nachricht → ein Satz |
 | KI-Schritt 3 | „Lead bewerten“ (Information Extractor): bekommt Firma, Website, Mitarbeitende, Anzahl Räume, Region, Nachricht, Firmenprofil → Score, Stufe, Begründung, Nächster Schritt, Segment, Branche |
 | KI-Schritt 4 | „Antwortentwurf schreiben“ (Basic LLM Chain): bekommt Firma, Nachricht, Bewertung → Entwurf ohne Anrede |
-| Nicht an die KI | Name, E-Mail, Rolle (bis Lab 11.1 gingen sie an „Lead bewerten“ und „Antwortentwurf schreiben“) |
-| Regeln ohne KI | Region „Sonstige“ → Status „Prüfen“; Score ab 70, mindestens 2 Räume und Segment nicht „Kein Fit“ → „Heiß“, sonst „Später pflegen“ |
+| Nicht an die KI | Name, E-Mail (seit Lab 7.2), Rolle (bis Lab 11.1 ging sie an „Lead bewerten“ und „Antwortentwurf schreiben“) |
+| Regeln ohne KI | Region „Sonstige“ → Status „Prüfen“; Score ab 70, „Anzahl Räume“ leer oder mindestens 2 und Segment nicht „Kein Fit“ → „Heiß“, sonst „Später pflegen“ |
 | Empfänger der Daten | n8n Cloud; KI-Anbieter (Firmendaten, Nachricht); Notion (alle Felder) |
 | Freigabe | Antwortentwurf mit „Freigabe offen“; ein Mensch prüft, versendet von Hand, setzt „Gesendet“ |
 | Kennzeichnung | Kontrollkästchen `KI-gestützt` |

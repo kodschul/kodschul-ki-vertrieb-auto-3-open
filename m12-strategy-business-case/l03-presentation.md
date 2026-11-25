@@ -84,7 +84,8 @@ Jede Rückmeldung nennt je Kriterium einen Punkt, der überzeugt hat, oder eine 
 
 1. Öffne die Notion-Seite und ordne die drei Folientexte nach dem Aufbau oben; ergänze auf Folie 1 die erbetene Entscheidung und auf Folie 3 den ersten Schritt am Montag.
 2. Präsentiere in drei Minuten und zeige, wenn vorhanden, den Prototyp in n8n.
-3. Trage die Rückmeldungen der Gruppe in die Tabelle „Rückmeldung“ auf der Notion-Seite ein (Kriterium, Punkt, Änderung).
+3. Gib bei jeder anderen Präsentation je Kriterium einen Punkt, der überzeugt hat, oder eine offene Frage.
+4. Lege auf der Notion-Seite eine Tabelle „Rückmeldung“ mit den Spalten Kriterium, Punkt, Änderung an und trage die Rückmeldungen zur eigenen Präsentation ein.
 
 **Checkpoint:** Die Notion-Seite enthält drei Folientexte in der Reihenfolge Problem, Konzept, Nutzen und nächster Schritt sowie eine ausgefüllte Rückmeldungstabelle mit drei Zeilen.
 

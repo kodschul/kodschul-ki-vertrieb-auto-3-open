@@ -58,7 +58,7 @@ Große CRM-Systeme bieten Prognosen, die aus den eigenen gewonnenen und verloren
 | CRM | Funktion | Was sie nutzt | Voraussetzung |
 | --- | --- | --- | --- |
 | Microsoft Dynamics 365 Sales | Predictive forecasting, Spalte „Prediction“ im Forecast | historische Daten und offene Pipeline, KI-Modell | Premium-Forecasting-Lizenz; bei zu wenig Daten bleibt die Spalte leer |
-| HubSpot Sales Hub | KI-Prognose mit Breeze | gewonnene Deals der letzten drei Monate; Ergebnis als Spanne mit „Most likely“ | Sales Hub bzw. Service Hub Professional oder Enterprise |
+| HubSpot Sales Hub | KI-Prognose mit Breeze | gewonnene Deals der letzten drei Monate; Ergebnis als Spanne mit „Most likely“ | Sales Hub bzw. Service Hub Professional oder Enterprise, zugewiesener Sales- oder Service-Seat; Funktion im Beta-Status, Konto muss für die Beta angemeldet werden (Opt-in) |
 | Salesforce Sales Cloud | Einstein Forecasting (seit 2017) | historische CRM-Daten, Saisonalität, frühere Leistung | eigene Lizenz bzw. höhere Edition |
 
 _Quellen: Microsoft Learn, „Analyze revenue outcome by using predictive forecasting“ (https://learn.microsoft.com/en-us/dynamics365/sales/analyze-revenue-outcome-using-predictive-forecasting, Stand 06.05.2026); HubSpot Knowledge Base, „Improve forecasting with AI projections“ (https://knowledge.hubspot.com/forecast/improve-forecasting-with-ai-projections, Stand 29.05.2026); Salesforce, Pressemitteilung „Salesforce Introduces Sales Cloud Einstein Forecasting“, 19.09.2017 (https://www.salesforce.com/news/press-releases/2017/09/19/salesforce-introduces-sales-cloud-einstein-forecasting-celebrates-one-year-of-salesforce-einstein/); alle abgerufen am 23.11.2026._
@@ -79,9 +79,11 @@ Im Kurs wird das Prinzip von Hand nachgebaut: tatsächliche Quote je Phase aus 3
 
 | Szenario | Regel im Kurs | Aussage |
 | --- | --- | --- |
-| bester Fall | offene Deals des Quartals × angenommene Wahrscheinlichkeit | „wenn die CRM-Annahmen stimmen“ |
+| bester Fall (laut CRM-Annahmen) | offene Deals des Quartals × angenommene Wahrscheinlichkeit | „wenn die CRM-Annahmen stimmen“ |
 | wahrscheinlicher Fall | offene Deals des Quartals × tatsächliche Quote ihrer Phase | „wenn es so läuft wie bisher“ |
 | schlechtester Fall | nur Deals ab „Angebot versendet“ × tatsächliche Quote; frühere Phasen zählen 0 € | „wenn nur reife Deals im Quartal schließen“ |
+
+„Bester Fall“ heißt hier: Fall laut CRM-Annahmen. Er ist nur dann der höchste Betrag, wenn die angenommenen Wahrscheinlichkeiten über den tatsächlichen Quoten liegen; im 1. Quartal 2027 ist das so, weil 12 der 19 Deals ab Demo stehen, wo die Annahmen zu hoch sind.
 
 Die Spanne zwischen schlechtestem und bestem Fall ist ehrlicher als eine einzelne Zahl; die Gegenprobe mit der Board-Summe aus Lab 4.2 zeigt, ob die Rechnung stimmt.
 
@@ -139,7 +141,7 @@ Schreibe einen Prognosekommentar für die Vertriebsleitung in genau fünf Sätze
 Nutze nur Zahlen aus diesem Chat, runde auf volle Tausend Euro, erfinde nichts. Klare Sprache ohne Fachjargon.
 ```
 
-**Checkpoint:** Der Chat zeigt 339.221,17 € (tatsächliche Quoten) gegenüber 376.922,70 € (angenommen); die Notion-Board-Summe bestätigt 376.922,70 €; die Seite „Prognose Q1 2027“ enthält Szenarien und Kommentar.
+**Checkpoint:** Der Chat zeigt 339.221,17 € (tatsächliche Quoten, ± 100 € bei gerundeten Quoten) gegenüber 376.922,70 € (angenommen); die Notion-Board-Summe bestätigt 376.922,70 €; die Seite „Prognose Q1 2027“ enthält Szenarien und Kommentar.
 
 **Erweiterung:** Prompt-Karte 5.2a getrennt nach Segment senden und prüfen, ob „Angebot versendet“ bei Kanzleien anders ausfällt als bei Coworking.
 
@@ -180,9 +182,9 @@ Mit tatsächlichen Quoten sinkt die gewichtete Pipeline um 10 %. Dezember 2026: 
 
 | Szenario | Regel | Betrag |
 | --- | --- | --- |
-| bester Fall | angenommene Wahrscheinlichkeiten | 210.608,30 € |
+| bester Fall (laut CRM-Annahmen, hier der höchste) | angenommene Wahrscheinlichkeiten | 210.608,30 € |
 | wahrscheinlicher Fall | tatsächliche Quoten je Phase | 180.981,84 € |
-| schlechtester Fall | nur Angebot versendet (113.446 € × 33,3 % = 37.815,33 €) und Verhandlung (Aare Versicherungsdienst, 56.605 € × 60 % = 33.963,00 €) | 71.778,33 € |
+| schlechtester Fall | nur Angebot versendet (113.446 € × 8/24 (33,3 %) = 37.815,33 €) und Verhandlung (Aare Versicherungsdienst, 56.605 € × 60 % = 33.963,00 €) | 71.778,33 € |
 
 **5.2d – Prognosekommentar**
 > Für das 1. Quartal 2027 rechnen wir mit rund 181.000 € Umsatz, in einer Spanne von 72.000 € bis 211.000 €. Die gewichtete Pipeline im CRM zeigt 377.000 €, mit den tatsächlichen Abschlussquoten der abgeschlossenen Deals sind es nur 339.000 €. Am stärksten überschätzt ist die Phase „Angebot versendet“: angenommen ist jedes zweite Angebot, gewonnen wird nur jedes dritte. Im Dezember entscheiden drei Deals in Verhandlung mit zusammen 141.000 €, vor allem Polderland Verzekeringen mit 91.000 €, und drei Deals mit 99.000 € sind bereits überfällig. Wir empfehlen, die Wahrscheinlichkeiten im CRM an die tatsächlichen Quoten anzupassen und die überfälligen Deals noch diese Woche nachzufassen.

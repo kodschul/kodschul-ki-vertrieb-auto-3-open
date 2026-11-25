@@ -154,6 +154,8 @@ Die Bewertungsmatrix aus Lab 3.3 und die Gesprächsnotiz aus Lab 4.3 sind schon 
 <details>
 <summary>Musterergebnis anzeigen</summary>
 
+Stand: 23.11.2026, gebaut mit n8n 2.48.7.
+
 **Workflow auf der Arbeitsfläche:** `Workflow starten` → `Beispiel-Lead` → `Mindestens 5 Räume?`, dazu ein gelber Hinweiszettel.
 
 | Knoten | Art | INPUT | OUTPUT |

@@ -5,7 +5,7 @@
 <details>
 <summary>Welche Angaben aus einer Anfrage braucht die KI wirklich, um eine Firma zu bewerten?</summary>
 
-Nur Firmendaten und Bedarf: Firma, Website, Mitarbeitende, Räume, Region, Nachricht. Name, E-Mail und Rolle der Ansprechperson zählen in der Bewertungsmatrix aus 3.3 nicht und bleiben deshalb draußen.
+Nur Firmendaten und Bedarf: Firma, Website, Mitarbeitende, Räume, Region, Nachricht. Name, E-Mail und Rolle der Ansprechperson zählen in der Bewertungsmatrix aus 3.3 nicht: Name und E-Mail bleiben seit Lab 7.2 draußen, die Rolle ab diesem Lab.
 
 </details>
 
@@ -125,7 +125,7 @@ _Quelle: EuGH, Urteil vom 07.12.2023, C-634/21 (https://eur-lex.europa.eu/legal-
 | 7 | Information | Erfährt die Person, dass KI und welche Dienste beteiligt sind? | Datenschutzhinweis, Formularhinweis (Lab 11.2) |
 | 8 | Entscheidung | Entscheidet am Ende ein Mensch? | Score nur Vorschlag, Freigabe offen |
 | 9 | Werberecht | Geht etwas ohne Einwilligung als Werbung raus? | nein, nur Antwort auf Anfrage nach Freigabe |
-| 10 | Speicherdauer | Wann wird gelöscht, auch in Ausführungsprotokollen? | Leads ohne Kontakt nach festgelegter Frist; n8n löscht Protokolle je Tarif nach 7 bis 30 Tagen |
+| 10 | Speicherdauer | Wann wird gelöscht, auch in Ausführungsprotokollen? | Leads ohne Kontakt nach festgelegter Frist; n8n Cloud hält Ausführungsprotokolle je Tarif 7 Tage (Starter) oder 30 Tage (Pro), Enterprise unbegrenzt |
 | 11 | Betroffenenrechte | Lassen sich Auskunft und Löschung in allen Systemen erfüllen? | Lead in Notion suchen, löschen, Ausführungen in n8n löschen |
 | 12 | Kennzeichnung | Ist sichtbar, was die KI bewertet oder entworfen hat? | Feld „KI-gestützt“ |
 
@@ -135,10 +135,10 @@ _Quelle Zeile 10: n8n Docs, „Cloud data management“ (https://docs.n8n.io/man
 
 **Material:** Workflow „Lead-Eingang“ aus Lab 8.2, [`testanfragen.md`](../material/testanfragen.md) (T1) · Rückfallebene: Musterworkflow [`m11-l01-datensparsam.json`](../material/workflows/m11-l01-datensparsam.json) importieren ([Anleitung](../material/workflows/README.md)) · **Werkzeug:** n8n, Notion
 
-**Ausgangslage:** Im Lead-Eingang aus Lab 8.2 bekommen „Lead bewerten“ und „Antwortentwurf schreiben“ Name, E-Mail und Rolle der Ansprechperson. Die Matrix braucht diese Angaben nicht, und die Anrede lässt sich ohne KI setzen. Menü- und Feldnamen: Bezeichnung je nach Version.
+**Ausgangslage:** Im Lead-Eingang aus Lab 8.2 bekommen „Lead bewerten“ und „Antwortentwurf schreiben“ noch die Rolle der Ansprechperson (Name und E-Mail schon seit Lab 7.2 nicht), und den Namen in der Anrede ergänzt bisher ein Mensch. Die Matrix braucht die Rolle nicht, und die Anrede mit Namen lässt sich ohne KI setzen. Menü- und Feldnamen: Bezeichnung je nach Version.
 
-1. Öffne in n8n den Workflow „Lead-Eingang“, öffne den Knoten „Lead bewerten“ und lösche im Feld „Text“ die drei Zeilen `Name:`, `E-Mail:` und `Rolle der Ansprechperson:`. Ergänze in der Systemanweisung die Regel aus Prompt-Karte 11.1a.
-2. Öffne „Antwortentwurf schreiben“, lösche im Feld „Prompt (User Message)“ die Zeilen `Name:` und `Rolle:` und ersetze in der Systemnachricht die Anrede-Regel durch Prompt-Karte 11.1b. Ergänze in „Anfrage zusammenfassen“ ebenfalls die Regel aus 11.1a.
+1. Öffne in n8n den Workflow „Lead-Eingang“, öffne den Knoten „Lead bewerten“ und lösche im Feld „Text“ die Zeile `Rolle der Ansprechperson:`. Ergänze in der Systemanweisung die Regel aus Prompt-Karte 11.1a.
+2. Öffne „Antwortentwurf schreiben“, lösche im Feld „Prompt (User Message)“ die Zeile `Rolle:` und ersetze in der Systemnachricht die Anrede-Regel durch Prompt-Karte 11.1b. Ergänze in „Anfrage zusammenfassen“ ebenfalls die Regel aus 11.1a.
 3. Prüfe in Notion, dass die Eigenschaft `KI-gestützt` den Typ Kontrollkästchen hat, und gib ihr die Beschreibung „KI-gestützt bewertet, vom Menschen geprüft“.
 4. Öffne „Lead in Notion anlegen“: Setze im Feld `Antwortentwurf` (Modus „Expression“) den Ausdruck aus dem Block „Anrede im Notion-Knoten“ und füge über „Add Property“ die Eigenschaft `KI-gestützt` mit Häkchen hinzu. Speichere den Workflow.
 5. Sende T1 über das Testformular und vergleiche den neuen Notion-Eintrag mit dem T1-Eintrag aus Lab 8.2: Score, Stufe, Begründung, Entwurf. Öffne die Ausführung und prüfe die Eingabe jedes KI-Knotens.
@@ -163,7 +163,7 @@ Guten Tag {{ $('Lead-Anfrage').item.json.Name }},
 {{ $('Antwortentwurf schreiben').item.json.text }}
 ```
 
-**Checkpoint:** Kein KI-Knoten zeigt in seiner Eingabe Name, E-Mail oder Rolle. Der neue T1-Eintrag in Notion hat dieselbe Stufe wie in Lab 8.2, einen Entwurf, der mit „Guten Tag Johanna Weiß,“ beginnt, und ein Häkchen bei `KI-gestützt`.
+**Checkpoint:** Kein KI-Knoten bekommt die Formularfelder Name, E-Mail oder Rolle (ein Name im Gruß der Nachricht bleibt, siehe Musterergebnis). Der neue T1-Eintrag in Notion hat dieselbe Stufe wie in Lab 8.2, einen Entwurf, der mit „Guten Tag Johanna Weiß,“ beginnt, und ein Häkchen bei `KI-gestützt`.
 
 **Erweiterung:** Die Prüfliste oben Zeile für Zeile für den Workflow „Gesprächsnotiz“ aus Lab 9.1 durchgehen; dort enthält die Notiz selbst Namen.
 
@@ -180,9 +180,9 @@ Beispiel – KI-Ergebnisse fallen jedes Mal etwas anders aus. Knotennamen und Au
 | --- | --- | --- |
 | Firmenprofil zusammenfassen | Website, Seiteninhalt | unverändert |
 | Anfrage zusammenfassen | Firma, Mitarbeitende, Anzahl Räume, Region, Nachricht | unverändert, plus Regel 11.1a |
-| Lead bewerten | Firma, Website, **Name, E-Mail, Rolle**, Mitarbeitende, Anzahl Räume, Region, Nachricht, Firmenprofil | Firma, Website, Mitarbeitende, Anzahl Räume, Region, Nachricht, Firmenprofil; Regel 11.1a |
-| Antwortentwurf schreiben | **Name**, Firma, **Rolle**, Nachricht, Bewertung | Firma, Nachricht, Bewertung; Regel 11.1b |
-| Lead in Notion anlegen | alle Felder, Entwurf von der KI | alle Felder (Name und E-Mail für das CRM), Anrede vor dem Entwurf, `KI-gestützt` = angehakt |
+| Lead bewerten | Firma, Website, **Rolle**, Mitarbeitende, Anzahl Räume, Region, Nachricht, Firmenprofil | Firma, Website, Mitarbeitende, Anzahl Räume, Region, Nachricht, Firmenprofil; Regel 11.1a |
+| Antwortentwurf schreiben | Firma, **Rolle**, Nachricht, Bewertung; Anrede „Guten Tag,“ ohne Namen | Firma, Nachricht, Bewertung; Regel 11.1b |
+| Lead in Notion anlegen | alle Felder, Entwurf von der KI, Name in der Anrede von Hand | alle Felder (Name und E-Mail für das CRM), Anrede mit Namen vor dem Entwurf, `KI-gestützt` = angehakt |
 
 **Notion-Eintrag T1 – Steuerkanzlei Lorenzen & Partner mbB**
 
@@ -204,7 +204,7 @@ Beispiel – KI-Ergebnisse fallen jedes Mal etwas anders aus. Knotennamen und Au
 > Viele Grüße
 > Vertriebsteam Nordwind Workspace
 
-Warum gut: Score und Stufe bleiben gleich, weil die Matrix keine Personendaten bewertet; die Anrede stimmt sicher, weil sie aus dem Formular kommt statt aus der KI. Grenze: Was in der Nachricht selbst steht (hier der Gruß „Johanna Weiß“), erreicht die KI weiterhin; Regel 11.1a verhindert nur, dass es in die Ergebnisse übernommen wird.
+Warum gut: Score und Stufe bleiben gleich, weil die Matrix keine Personendaten bewertet; die Anrede stimmt sicher, weil sie aus dem Formular kommt statt von Hand oder aus der KI. Grenze: Was in der Nachricht selbst steht (hier der Gruß „Johanna Weiß“), erreicht die KI weiterhin; Regel 11.1a verhindert nur, dass es in die Ergebnisse übernommen wird.
 
 </details>
 

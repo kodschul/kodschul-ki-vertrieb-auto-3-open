@@ -9,7 +9,7 @@ Fünf Prompts für die Auswertung der Datenbank `Deals` mit einem KI-Assistenten
 1. Neuen Chat öffnen.
 2. Die CSV-Datei der Datenbank `Deals` hochladen (Export aus Notion, Anleitung in [Lab 5.1](../m05-sales-analytics/l01-pipeline-analysis.md), oder direkt [`notion/nordwind-deals.csv`](notion/nordwind-deals.csv)). Klappt der Upload nicht (Tageslimit kostenloser Konten), den Dateiinhalt unter den Prompt kopieren.
 3. Prompt 5.1a senden, danach 5.1b bis 5.1e nacheinander im selben Chat.
-4. Je Auswertung eine Zahl in Notion per Filter nachprüfen (Prüfwege in Lab 5.1).
+4. Zahlen in Notion per Filter nachprüfen: Pflicht sind 5.1b (6 gestockte Deals) und 5.1d (13 Verluste an RaumPilot), 5.1c und 5.1e sind Erweiterung (Prüfwege und Schritte für den erweiterten Filter in Lab 5.1).
 
 Alle Prompts nennen den **Stichtag der Übungsdaten 01.12.2026**. Ohne diesen Satz rechnet die KI mit dem heutigen Datum, und „überfällig“ oder „seit 30 Tagen kein Kontakt“ ergeben andere Deals. Jeder Prompt verlangt den Rechenweg, damit sich eine Zahl gegenprüfen lässt.
 

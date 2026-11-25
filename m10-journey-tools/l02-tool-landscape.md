@@ -39,22 +39,22 @@ Häufig gerade die KI-Funktionen: Zusammenfassungen, Mail-Entwürfe, Prognosen. 
 
 ## Drei Werkzeugklassen für KI im Vertrieb
 
-| Klasse | Wofür | Beispiele | Typische KI-Funktionen |
-| --- | --- | --- | --- |
-| CRM-System | Leads, Kontakte, Deals, Pipeline | HubSpot, Salesforce, Microsoft Dynamics 365 Sales, Pipedrive | Zusammenfassung eines Datensatzes, Mail-Entwurf, Abschlussprognose, Assistent im Seitenfenster |
-| Marketing-Automatisierung | Kampagnen, Newsletter, Nurturing (Lab 10.1) | HubSpot Marketing Hub, Brevo, ActiveCampaign | Kampagne und Mails entwerfen, Inhalte je Kontakt anpassen |
-| KI-Vertriebswerkzeug | eine Aufgabe besonders gut | Recherche und Anreicherung: Clay, Apollo, Leadfeeder; Gesprächsanalyse: Gong | Firmendaten zusammentragen, Kaufsignale erkennen, Gespräche auswerten |
+| Klasse | Wofür | Beispiele |
+| --- | --- | --- |
+| CRM-System | Leads, Kontakte, Deals, Pipeline | HubSpot, Salesforce, Microsoft Dynamics 365 Sales, Pipedrive |
+| Marketing-Automatisierung | Kampagnen, Newsletter, Nurturing (Lab 10.1) | HubSpot Marketing Hub, Brevo, ActiveCampaign |
+| KI-Vertriebswerkzeug | eine Aufgabe besonders gut: Recherche, Anreicherung, Gesprächsanalyse | Clay, Apollo, Leadfeeder, Gong |
 
 ## KI-Funktionen in CRM-Systemen
 
-| CRM | KI-Funktionen laut Hersteller | Datenstandort | Testzugang |
-| --- | --- | --- | --- |
-| **HubSpot** | „Agent Hub“ mit Breeze Assistant: Berichte, Angebote und Seiten aus CRM-Daten; Agent für Interessenten-Recherche und Datenfragen; in Starter, Professional und Enterprise enthalten, viele Funktionen verbrauchen „HubSpot Credits“ | AWS-Rechenzentren u. a. in der EU (Deutschland); Zuordnung bei der Registrierung nach IP-Adresse, Wechsel nur mit bezahltem Tarif | CRM kostenlos ohne Ablaufdatum |
-| **Salesforce** Sales Cloud | Agentforce: Zusammenfassungen für Accounts, Opportunities, Leads und Kontakte, automatische Pflege von Phase und nächstem Schritt, Prognosen („Predictive Scoring“) | Hyperforce-Regionen u. a. Deutschland | 30 Tage kostenlos |
-| **Microsoft Dynamics 365 Sales** | Copilot: Zusammenfassung von Datensätzen, Vorbereitung von Terminen, Mail-Entwürfe, Nachrichten zu Kunden; Nachfolger ist der „Sales agent“ in Microsoft 365 Copilot | Verarbeitung in der EU Data Boundary; „Flex routing“ kann bei Last außerhalb verarbeiten, solange Admins es nicht abschalten | 30 Tage kostenlos |
-| **Pipedrive** | AI Sales Assistant: Zusammenfassungen, Abschlusswahrscheinlichkeit mit nächster Aktion, Mail-Generator und Mail-Zusammenfassung | EU-Kunden in AWS-Regionen Frankfurt und Dublin; KI-Funktionen nutzen Unterauftragnehmer in verschiedenen Ländern | 14 Tage kostenlos |
+| CRM | Eingebauter KI-Assistent | Daten in der EU möglich? |
+| --- | --- | --- |
+| **HubSpot** | Breeze Assistant und Agenten im „Agent Hub“ | ja, Rechenzentrum in Deutschland |
+| **Salesforce** Sales Cloud | Agentforce | ja, Hyperforce-Region Deutschland |
+| **Microsoft Dynamics 365 Sales** | Copilot; Microsoft entwickelt Copilot zum „Sales agent“ in Microsoft 365 Copilot weiter (Stand 23.11.2026, Quelle: [Microsoft Learn – Copilot in Dynamics 365 Sales](https://learn.microsoft.com/en-us/dynamics365/sales/copilot-overview)) | ja, EU Data Boundary, mit Ausnahme „Flex routing“ |
+| **Pipedrive** | AI Sales Assistant | ja für CRM-Daten; KI-Funktionen nutzen Unterauftragnehmer in verschiedenen Ländern |
 
-Stand 22.11.2026, Angaben der Hersteller ohne Prüfung im eigenen Konto; vor einer Entscheidung prüfen. Quellen: HubSpot [Agent Hub](https://www.hubspot.com/products/artificial-intelligence), [Rechenzentren](https://knowledge.hubspot.com/account-security/hubspot-cloud-infrastructure-and-data-hosting-frequently-asked-questions), [Free CRM](https://www.hubspot.com/products/crm) · Salesforce [Sales AI](https://www.salesforce.com/sales/ai/), [Hyperforce](https://www.salesforce.com/platform/public-cloud-infrastructure/) · Microsoft [Copilot in Dynamics 365 Sales](https://learn.microsoft.com/en-us/dynamics365/sales/copilot-overview), [Geografische Verfügbarkeit](https://learn.microsoft.com/en-us/power-platform/admin/geographical-availability-copilot), [Testversion](https://www.microsoft.com/en-us/dynamics-365/free-trial) · Pipedrive [AI Sales Assistant](https://www.pipedrive.com/en/features/ai-sales-assistant), [Trust Center](https://trustcenter.pipedrive.com/).
+Stand 22.11.2026, Angaben der Hersteller; Funktionen, Tarife und Testzugänge je CRM unter [Vertiefung](#vertiefung).
 
 ![Microsoft Dynamics 365 Sales: Formular einer Verkaufschance mit rot markiertem Copilot-Widget „Summary“, das die wichtigsten Angaben der Verkaufschance in Stichpunkten zusammenfasst](https://learn.microsoft.com/en-us/dynamics365/sales/media/copilot-opportunity-summary-widget.png)
 _Quelle: Microsoft Learn, „Summarize records with Copilot“ (https://learn.microsoft.com/en-us/dynamics365/sales/copilot-summarize-records), © Microsoft, abgerufen am 23.11.2026._
@@ -64,30 +64,21 @@ Die Zusammenfassung im Bild ist dasselbe wie die Zusammenfassung aus Lab 7.1, nu
 ![Pipedrive Sales Assistant als Chatfenster: Frage „What's our sales performance for the last quarter?“, Antwort mit Anzahl der Deals je Monat und den Reitern „Answer“ und „Sources“](https://kb-cms.pipedriveassets.com/questions%20about%20my%20data.png)
 _Quelle: Pipedrive Knowledge Base, „Sales Assistant“ (https://support.pipedrive.com/en/article/sales-assistant), © Pipedrive, abgerufen am 23.11.2026._
 
-## Marketing-Automatisierung mit KI
+## Marketing-Automatisierung und KI-Vertriebswerkzeuge
 
-| Werkzeug | KI-Funktionen laut Hersteller | Datenstandort | Testzugang |
-| --- | --- | --- | --- |
-| **HubSpot Marketing Hub** | Content Agent (Blog, Social, Landingpages), Nurture Agent (schreibt jede Nurturing-Mail für den einzelnen Kontakt um), Campaign Agent (plant eine ganze Kampagne) | wie HubSpot CRM | 14 Tage; kostenlose Basiswerkzeuge |
-| **Brevo** | „Aura“-Agenten: Inhalte erzeugen, Kontakte anreichern, Deals anlegen, Live-Chats zusammenfassen | Server in der EU | kostenloser Tarif bis 300 Mails pro Tag |
-| **ActiveCampaign** | Active Intelligence: erkennt Anlässe und baut ganze Kampagnen, regelmäßige Auswertungen per Mail, Bilder erzeugen | keine Angabe zu EU-Rechenzentren gefunden (prüfen) | 14 Tage |
+| Werkzeug | KI-Funktion laut Hersteller | Bezug im Kurs |
+| --- | --- | --- |
+| HubSpot Marketing Hub | Agenten für Inhalte, Nurturing-Mails und ganze Kampagnen | Nurturing (Lab 10.1) |
+| Brevo | „Aura“-Agenten für Inhalte und Kontakte, Server in der EU | Nurturing (Lab 10.1) |
+| ActiveCampaign | Active Intelligence baut ganze Kampagnen | Nurturing (Lab 10.1) |
+| [Clay](https://www.clay.com/), [Apollo](https://www.apollo.io/) | Firmen- und Kontaktdaten aus vielen Quellen, Signale | Recherche und Anreicherung (Lab 3.2, 8.1) |
+| [Leadfeeder](https://www.leadfeeder.com/) (früher „Dealfront“) | erkennt Firmen, die die eigene Website besuchen; Daten in der EU | Kaufsignale (Lab 3.2) |
+| [Gong](https://www.gong.io/) | wertet Anrufe, Mails und Termine aus | Gesprächsnotiz (Lab 4.3, 9.1) |
 
-Stand 22.11.2026; Quellen: [HubSpot Marketing Hub](https://www.hubspot.com/products/marketing), [Brevo AI](https://www.brevo.com/ai/), [Brevo Datensicherheit](https://www.brevo.com/features/data-security/), [Brevo Preise](https://www.brevo.com/pricing/), [ActiveCampaign AI](https://www.activecampaign.com/ai).
+Stand 22.11.2026, Herstellerseiten; Leadfeeder Stand 23.11.2026 ([leadfeeder.com](https://www.leadfeeder.com/): „Dealfront is now Leadfeeder“, Daten werden in der EU verarbeitet und gespeichert). Kontaktdatenbanken und Gesprächsaufzeichnung berühren Datenschutz und Einwilligung besonders stark (vertieft in Modul 11).
 
 ![HubSpot Marketing Studio: links das Breeze-Fenster „Hi Maria, how can I help you?“ mit Vorschlägen; rechts Insights zu Kampagnen, ein Diagramm „Active campaigns pipeline“ und die Kampagnenliste mit 18 Kampagnen](https://www.hubspot.com/hubfs/MH_Studio_Overview_08212026%20%281%29.png)
 _Quelle: HubSpot, „Marketing Hub“ (https://www.hubspot.com/products/marketing), Produktbild © HubSpot, abgerufen am 23.11.2026._
-
-## KI-Vertriebswerkzeuge für einzelne Aufgaben
-
-| Aufgabe | Beispiel | Was es laut Hersteller tut | Bezug im Kurs |
-| --- | --- | --- | --- |
-| Recherche und Anreicherung | [Clay](https://www.clay.com/) | Daten von über 200 Anbietern an einem Ort, Signale wie Jobwechsel verfolgen | Anreicherung mit Firmenprofil (Lab 8.1) |
-| | [Apollo](https://www.apollo.io/) | Vertriebsplattform mit Kontaktdaten, Signalen und Ausführung | Recherche (Lab 3.2) |
-| | [Leadfeeder](https://www.dealfront.com/) (früher Dealfront) | erkennt Firmen, die die eigene Website besuchen; „Hosted in the EU“ | Kaufsignale (Lab 3.2) |
-| Gesprächsanalyse | [Gong](https://www.gong.io/) | lernt aus Anrufen, Mails und Terminen, Agenten unterstützen das Vertriebsteam | Gesprächsnotiz (Lab 4.3, 9.1) |
-| Assistent im CRM | Copilot, Breeze, Agentforce, Pipedrive Sales Assistant | siehe Tabelle oben | Briefing (Lab 9.2) |
-
-Stand 22.11.2026, Herstellerseiten. Kontaktdatenbanken und Gesprächsaufzeichnung berühren Datenschutz und Einwilligung besonders stark (vertieft in Modul 11).
 
 ## Auswahlkriterien für Werkzeuge
 
@@ -106,18 +97,21 @@ Die Workflows aus Tag 2 und 3 bleiben gleich: Auslöser, KI-Schritt, Regeln, Fre
 Lead-Anfrage → Lead bewerten → Score ab 70? → [ Notion: Lead in Notion anlegen ]
                                                    ↓ ersetzen durch
                                               [ HubSpot: Contact → Create/Update ]
-                                              [ Salesforce: Lead → Create ]
                                               [ Pipedrive: Lead → Create ]
 ```
 
-| Aufgabe im Kurs | Notion (Übung) | HubSpot | Salesforce | Pipedrive | Microsoft Dynamics CRM |
-| --- | --- | --- | --- | --- | --- |
-| Lead anlegen (Lab 6.2) | Database Page → Create | Contact → Create/Update | Lead → Create | Lead → Create | nur Account; mehr über HTTP Request (Lab 8.1) |
-| Lead suchen und aktualisieren (Lab 9.1) | Get Many mit Filter → Update | Contact → Create/Update (Upsert über die Mailadresse) | Lead → Upsert oder Get All → Update | Lead → Get All → Update | Account → Get All → Update |
-| Offene Deals lesen (Lab 9.2) | Database Page → Get Many | Deal → Get All | Opportunity → Get All | Deal → Get All | über HTTP Request |
-| Ressourcen des Knotens | Database Page, Page, Block … | Contact, Company, Deal, Engagement, Form, Ticket … | Account, Contact, Lead, Opportunity, Task … | Activity, Deal, Lead, Note, Organization, Person … | Account |
+![Ältere n8n-Oberfläche: Workflow „Create an deal in Pipedrive“ aus zwei Knoten, „Start“ und „Pipedrive“ mit der Angabe „create: deal“; oben rechts der Schalter „Active“](https://raw.githubusercontent.com/n8n-io/n8n-docs/28ec56945f9ee330ffb6a2c8964b57036ac9214f/docs/_images/integrations/builtin/app-nodes/pipedrive/workflow.png)
+_Quelle: n8n Docs, Beispielbild im GitHub-Repo n8n-io/n8n-docs (https://github.com/n8n-io/n8n-docs/blob/28ec56945f9ee330ffb6a2c8964b57036ac9214f/docs/_images/integrations/builtin/app-nodes/pipedrive/workflow.png), Repo-Stand März 2024, Oberfläche von 2022, © n8n, abgerufen am 23.11.2026. Aktuelle Knotenseite: [n8n Docs – Pipedrive node](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.pipedrive)._
 
-Stand 22.11.2026, Operationen je nach Version anders benannt; Quellen: n8n Docs [HubSpot](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.hubspot), [Salesforce](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.salesforce), [Pipedrive](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.pipedrive), [Microsoft Dynamics CRM](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.microsoftdynamicscrm), Übersicht [n8n.io/integrations](https://n8n.io/integrations/). Die Verbindung zum Firmen-CRM richtet die IT ein (Zugangsdaten, Rechte); getestet wird in einer Testumgebung, nie im echten Kundenbestand.
+Der Pipedrive-Knoten sitzt im Workflow an derselben Stelle wie der Notion-Knoten: Ressource („deal“) und Operation („create“) wählen, Felder zuordnen.
+
+| Aufgabe im Kurs | Notion (Übung) | HubSpot | Pipedrive |
+| --- | --- | --- | --- |
+| Lead anlegen (Lab 6.2) | Database Page → Create | Contact → Create/Update | Lead → Create |
+| Lead suchen und aktualisieren (Lab 9.1) | Get Many mit Filter → Update | Contact → Create/Update (Upsert über die Mailadresse) | Lead → Get All → Update |
+| Offene Deals lesen (Lab 9.2) | Database Page → Get Many | Deal → Get All | Deal → Get All |
+
+Stand 22.11.2026, Operationen je nach Version anders benannt; Salesforce und Microsoft Dynamics unter [Vertiefung](#vertiefung). Die Verbindung zum Firmen-CRM richtet die IT ein (Zugangsdaten, Rechte); getestet wird in einer Testumgebung, nie im echten Kundenbestand.
 
 ## Übung: Steckbrief „Unser CRM und KI“ recherchieren
 
@@ -191,3 +185,37 @@ Warum gut: Jede Angabe hat eine Herstellerquelle, und die Prüfung hat eine zu g
 - Der Weg ins eigene CRM tauscht nur den Notion-Knoten; Auslöser, KI-Schritte und Freigabe bleiben.
 
 > **Merksatz:** Erst prüfen, was das eigene CRM schon kann, dann ergänzen, was fehlt.
+
+## Vertiefung
+
+### KI-Funktionen, Datenstandort und Testzugang je CRM
+
+| CRM | KI-Funktionen laut Hersteller | Datenstandort | Testzugang |
+| --- | --- | --- | --- |
+| **HubSpot** | „Agent Hub“ mit Breeze Assistant: Berichte, Angebote und Seiten aus CRM-Daten; Agent für Interessenten-Recherche und Datenfragen; in Starter, Professional und Enterprise enthalten, viele Funktionen verbrauchen „HubSpot Credits“ | AWS-Rechenzentren u. a. in der EU (Deutschland); Zuordnung bei der Registrierung nach IP-Adresse, Wechsel nur mit bezahltem Tarif | CRM kostenlos ohne Ablaufdatum |
+| **Salesforce** Sales Cloud | Agentforce: Zusammenfassungen für Accounts, Opportunities, Leads und Kontakte, automatische Pflege von Phase und nächstem Schritt, Prognosen („Predictive Scoring“) | Hyperforce-Regionen u. a. Deutschland | 30 Tage kostenlos |
+| **Microsoft Dynamics 365 Sales** | Copilot: Zusammenfassung von Datensätzen, Vorbereitung von Terminen, Mail-Entwürfe, Nachrichten zu Kunden; der „Sales agent“ in Microsoft 365 Copilot wird laut Microsoft der bevorzugte Zugang | Verarbeitung in der EU Data Boundary; „Flex routing“ kann bei Last außerhalb verarbeiten, solange Admins es nicht abschalten | 30 Tage kostenlos |
+| **Pipedrive** | AI Sales Assistant: Zusammenfassungen, Abschlusswahrscheinlichkeit mit nächster Aktion, Mail-Generator und Mail-Zusammenfassung | EU-Kunden in AWS-Regionen Frankfurt und Dublin; KI-Funktionen nutzen Unterauftragnehmer in verschiedenen Ländern | 14 Tage kostenlos |
+
+Stand 22.11.2026 (Microsoft „Sales agent“: 23.11.2026), Angaben der Hersteller ohne Prüfung im eigenen Konto; vor einer Entscheidung prüfen. Quellen: HubSpot [Agent Hub](https://www.hubspot.com/products/artificial-intelligence), [Rechenzentren](https://knowledge.hubspot.com/account-security/hubspot-cloud-infrastructure-and-data-hosting-frequently-asked-questions), [Free CRM](https://www.hubspot.com/products/crm) · Salesforce [Sales AI](https://www.salesforce.com/sales/ai/), [Hyperforce](https://www.salesforce.com/platform/public-cloud-infrastructure/) · Microsoft [Copilot in Dynamics 365 Sales](https://learn.microsoft.com/en-us/dynamics365/sales/copilot-overview), [Geografische Verfügbarkeit](https://learn.microsoft.com/en-us/power-platform/admin/geographical-availability-copilot), [Testversion](https://www.microsoft.com/en-us/dynamics-365/free-trial) · Pipedrive [AI Sales Assistant](https://www.pipedrive.com/en/features/ai-sales-assistant), [Trust Center](https://trustcenter.pipedrive.com/).
+
+### Marketing-Automatisierung im Detail
+
+| Werkzeug | KI-Funktionen laut Hersteller | Datenstandort | Testzugang |
+| --- | --- | --- | --- |
+| **HubSpot Marketing Hub** | Content Agent (Blog, Social, Landingpages), Nurture Agent (schreibt jede Nurturing-Mail für den einzelnen Kontakt um), Campaign Agent (plant eine ganze Kampagne) | wie HubSpot CRM | 14 Tage; kostenlose Basiswerkzeuge |
+| **Brevo** | „Aura“-Agenten: Inhalte erzeugen, Kontakte anreichern, Deals anlegen, Live-Chats zusammenfassen | Server in der EU | kostenloser Tarif bis 300 Mails pro Tag |
+| **ActiveCampaign** | Active Intelligence: erkennt Anlässe und baut ganze Kampagnen, regelmäßige Auswertungen per Mail, Bilder erzeugen | keine Angabe zu EU-Rechenzentren gefunden (prüfen) | 14 Tage |
+
+Stand 22.11.2026; Quellen: [HubSpot Marketing Hub](https://www.hubspot.com/products/marketing), [Brevo AI](https://www.brevo.com/ai/), [Brevo Datensicherheit](https://www.brevo.com/features/data-security/), [Brevo Preise](https://www.brevo.com/pricing/), [ActiveCampaign AI](https://www.activecampaign.com/ai). Clay: Daten von über 200 Anbietern an einem Ort, Signale wie Jobwechsel verfolgen; Apollo: Vertriebsplattform mit Kontaktdaten, Signalen und Ausführung; Gong: lernt aus Anrufen, Mails und Terminen, Agenten unterstützen das Vertriebsteam (Herstellerseiten, Stand 22.11.2026).
+
+### Knotentausch für alle vier CRM
+
+| Aufgabe im Kurs | Notion (Übung) | HubSpot | Salesforce | Pipedrive | Microsoft Dynamics CRM |
+| --- | --- | --- | --- | --- | --- |
+| Lead anlegen (Lab 6.2) | Database Page → Create | Contact → Create/Update | Lead → Create | Lead → Create | nur Account; mehr über HTTP Request (Lab 8.1) |
+| Lead suchen und aktualisieren (Lab 9.1) | Get Many mit Filter → Update | Contact → Create/Update (über die Mailadresse) | Lead → Upsert oder Get All → Update | Lead → Get All → Update | Account → Get All → Update |
+| Offene Deals lesen (Lab 9.2) | Database Page → Get Many | Deal → Get All | Opportunity → Get All | Deal → Get All | über HTTP Request |
+| Ressourcen des Knotens | Database Page, Page, Block … | Contact, Company, Deal, Engagement, Form, Ticket … | Account, Contact, Lead, Opportunity, Task … | Activity, Deal, Lead, Note, Organization, Person … | Account |
+
+Stand 22.11.2026, Operationen je nach Version anders benannt; Quellen: n8n Docs [HubSpot](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.hubspot), [Salesforce](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.salesforce), [Pipedrive](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.pipedrive), [Microsoft Dynamics CRM](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.microsoftdynamicscrm), Übersicht [n8n.io/integrations](https://n8n.io/integrations/).

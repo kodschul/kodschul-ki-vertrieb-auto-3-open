@@ -85,7 +85,7 @@ Bausteine: Umfang (ein Team, ein Prozess) · Ablauf (Woche 1 bauen und testen, B
 
 ## Showcase: die ganze Kette an einem Nordwind-Problem
 
-Problem aus Lab 5.2: Nach dem Angebot gewinnt Nordwind nur 33,3 % statt der angenommenen 50 %, und 3 von 6 offenen Angeboten sind seit über 30 Tagen ohne Kontakt. Kurz: Angebote werden nicht nachgefasst.
+Problem aus Lab 5.1 und 5.2: Nach dem Angebot gewinnt Nordwind nur 33,3 % statt der angenommenen 50 %, und 3 von 6 offenen Angeboten sind seit über 30 Tagen ohne Kontakt. Kurz: Angebote werden nicht nachgefasst.
 
 | Schritt | Ergebnis |
 | --- | --- |

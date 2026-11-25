@@ -67,10 +67,11 @@ _Quelle: Wikimedia Commons, „Http request telnet ubuntu.png“ (https://common
 | URL | `{{ $json.Website }}` | Adresse aus dem Formularfeld Website |
 | Options → Response → Response Format | `Text` | Inhalt als reiner Text im Feld `data` |
 | Options → Timeout | `15000` | höchstens 15 Sekunden auf die Antwort warten |
+| Settings → On Error | `Continue` | ist die Seite nicht erreichbar, läuft der Workflow weiter; das Profil lautet dann „keine Angabe“ |
 
 Quelle: [n8n Docs – HTTP Request](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.httprequest), Stand 22.11.2026 (Bezeichnung je nach Version).
 
-Der nächste KI-Schritt bekommt nur die ersten 8.000 Zeichen der Seite: `{{ $json.data.slice(0, 8000) }}`. `slice(0, 8000)` schneidet den Text nach 8.000 Zeichen ab; das begrenzt Kosten und Laufzeit bei langen Seiten.
+Der nächste KI-Schritt bekommt nur die ersten 8.000 Zeichen der Seite: `{{ ($json.data || '').slice(0, 8000) }}`. `slice(0, 8000)` schneidet den Text nach 8.000 Zeichen ab; das begrenzt Kosten und Laufzeit bei langen Seiten. `|| ''` setzt einen leeren Text ein, wenn die Seite nicht erreichbar war und `data` fehlt.
 
 ## Fiktive Firmenprofile im Kurs-Repository
 
@@ -126,7 +127,7 @@ Viele Dienste liefern auch Kontaktdaten von Personen; deren Nutzung braucht eine
 
 **Ausgangslage:** Der Workflow bewertet nur, was im Formular steht. Ab jetzt liest er vorher die Firmenseite und gibt das Profil an Bewertung und Notion weiter.
 
-1. Stelle im Formular „Lead-Anfrage“ das Feld `Website` auf Pflichtfeld („Required Field“) und füge zwischen „Lead-Anfrage“ und „Anfrage zusammenfassen“ einen Knoten „HTTP Request“ mit dem Namen „Firmenprofil abrufen“ ein (Einstellungen aus der Tabelle oben).
+1. Stelle im Formular „Lead-Anfrage“ das Feld `Website` auf Pflichtfeld („Required Field“) und füge zwischen „Lead-Anfrage“ und „Anfrage zusammenfassen“ einen Knoten „HTTP Request“ mit dem Namen „Firmenprofil abrufen“ ein (Einstellungen aus der Tabelle oben, auch „On Error“).
 2. Füge danach eine Basic LLM Chain „Firmenprofil zusammenfassen“ mit dem Modell „KI-Modell Firmenprofil“ ein: Nutzer-Prompt laut Tabelle unten, System-Nachricht Prompt-Karte 8.1a.
 3. Stelle in „Anfrage zusammenfassen“ die fünf Ausdrücke von `$json.<Feld>` auf `$('Lead-Anfrage').item.json.<Feld>` um, denn `$json` enthält jetzt das Firmenprofil.
 4. Ergänze in „Lead bewerten“ am Ende des Texts das Firmenprofil, am Ende der Systemanweisung Prompt-Karte 8.1b und in „Lead in Notion anlegen“ die Eigenschaft `Firmenprofil` mit `{{ $('Firmenprofil zusammenfassen').item.json.text }}`.
@@ -137,7 +138,8 @@ Viele Dienste liefern auch Kontaktdaten von Personen; deren Nutzung braucht eine
 | Lead-Anfrage | Feld Website | Required Field an |
 | Firmenprofil abrufen (HTTP Request) | Method · URL | `GET` · `{{ $json.Website }}` |
 | | Response Format · Timeout | `Text` · `15000` |
-| Firmenprofil zusammenfassen (Basic LLM Chain) | Prompt (User Message) | `Inhalt der Firmenseite {{ $('Lead-Anfrage').item.json.Website }}:`, Leerzeile, `{{ $json.data.slice(0, 8000) }}` |
+| | Settings → On Error | `Continue` |
+| Firmenprofil zusammenfassen (Basic LLM Chain) | Prompt (User Message) | `Inhalt der Firmenseite {{ $('Lead-Anfrage').item.json.Website }}:`, Leerzeile, `{{ ($json.data \|\| '').slice(0, 8000) }}` |
 | | Chat Messages → System | Prompt-Karte 8.1a |
 | KI-Modell Firmenprofil | Credential · Model | `Use Gateway credits` · `gpt-5-mini` |
 | Anfrage zusammenfassen | Nutzer-Prompt | `Firma: {{ $('Lead-Anfrage').item.json.Firma }}` usw. |
@@ -160,7 +162,7 @@ Regeln:
 - Gib nur die fünf Stichpunkte aus.
 ```
 
-**Prompt-Karte 8.1b – Zusatzregel für „Lead bewerten“ (unter „Ausgabe“ anfügen)**
+**Prompt-Karte 8.1b – Zusatzregel für „Lead bewerten“ (am Ende der Systemanweisung anfügen)**
 
 ```text
 - Das Firmenprofil stammt von der öffentlichen Firmenseite und zählt wie die Angaben im Formular, auch für Anlass und Termine. Widersprechen sich Formular und Profil bei Größe oder Räumen, gilt das Formular und die Begründung nennt den Widerspruch.
@@ -176,10 +178,10 @@ Regeln:
 Stand nach Lab 8.1
 Lead-Anfrage → Firmenprofil abrufen → Firmenprofil zusammenfassen → Anfrage zusammenfassen
    → Lead bewerten (Formular + Firmenprofil) → Region außerhalb DACH/NL?
-       ├─ ja   → Status Prüfen ─────────────────────────┐
-       └─ nein → Score ab 70 und plausibel?             │
-                  ├─ ja   → Status Heiß ────────────────┤
-                  └─ nein → Status Später pflegen ──────┴→ Lead in Notion anlegen (+ Firmenprofil)
+       ├─ true  → Status Prüfen ────────────────────────┐
+       └─ false → Score ab 70 und plausibel?            │
+                   ├─ true  → Status Heiß ──────────────┤
+                   └─ false → Status Später pflegen ────┴→ Lead in Notion anlegen (+ Firmenprofil)
 ```
 
 ## Musterergebnis
@@ -227,7 +229,7 @@ Warum gut: Das Profil liefert genau die Angabe, die im Formular fehlte, und die 
 
 | Symptom | Ursache | Lösung |
 | --- | --- | --- |
-| „Firmenprofil abrufen“ meldet 404 | URL falsch kopiert oder Profil nicht erreichbar | Adresse exakt aus `testanfragen.md` übernehmen und im Browser öffnen |
+| „Firmenprofil abrufen“ meldet 404 und der Workflow bricht ab | URL falsch kopiert oder Profil nicht erreichbar; „On Error“ steht auf „Stop Workflow“ | Adresse exakt aus `testanfragen.md` übernehmen und im Browser öffnen; Settings → On Error → „Continue“, das Profil lautet dann „keine Angabe“ (Bezeichnung je nach Version) |
 | Profil lautet „keine Angabe“ in allen Punkten | Response Format nicht `Text`, Feld `data` fehlt | Response Format auf `Text` stellen |
 | Zusammenfassung beschreibt die Firmenseite statt der Anfrage | „Anfrage zusammenfassen“ liest noch `$json.…` | Ausdrücke auf `$('Lead-Anfrage')` umstellen (Aufgabe 3) |
 | T1 bleibt bei 61 | Profil fehlt im Text von „Lead bewerten“ oder Zusatzregel fehlt | Text und Systemanweisung prüfen (Aufgabe 4) |

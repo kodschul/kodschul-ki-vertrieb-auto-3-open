@@ -61,10 +61,10 @@ Die Wahrscheinlichkeiten sind Annahmen des Vertriebs, keine Messung. Ob sie stim
 
 ## Gewichtete Pipeline als Board
 
-Echte CRMs zeigen unter jeder Phasen-Spalte die Summe und den gewichteten Wert. In HubSpot steht unter der ersten Spalte zum Beispiel „Total: $13,590.00“ und „Weighted: $1,359.00 (10%)“:
+Echte CRMs zeigen die Pipeline als Board: eine Spalte je Phase, darin die Deals als Karten, am Spaltenkopf die Summe der Werte und die Anzahl der Deals. In Pipedrive steht über der Spalte „Proposal Made“ (Angebot gemacht) zum Beispiel „$81,712.09 · 2 deals“:
 
-![HubSpot-Deals in der Board-Ansicht: Spalten je Phase (Sourced, Applied, Phone Interview, Manager Interview, Hired) mit Deal-Karten, Beträgen und letzter Aktivität; unter jeder Spalte „Total“ und „Weighted“ mit Prozentsatz, z. B. Weighted $1,359.00 (10%)](https://www.hubspot.com/hubfs/assets/hubspot.com/web-team/WBZ/Feature%20Pages/pipeline-management/track-optimize-sales-process-en.png)
-_Quelle: HubSpot, „Pipeline Management Software“ (https://www.hubspot.com/products/crm/pipeline-management), Screenshot © HubSpot, abgerufen am 22.11.2026._
+![Pipedrive-Ansicht „Deals“ als Board mit den Phasen-Spalten Qualified, First call, Demo Scheduled, Proposal Made und Negotiations Started; je Spalte Summe und Anzahl der Deals, darunter Deal-Karten mit Firma, Kontakt und Betrag; oben die Schaltfläche „+ Deal“](https://kb-cms.pipedriveassets.com/pv2.1.png)
+_Quelle: Pipedrive Knowledge Base, „Pipeline view: manage deals lifecycle“ (https://support.pipedrive.com/en/article/pipeline-view), Screenshot © Pipedrive, abgerufen am 23.11.2026._
 
 Notion baut dasselbe aus drei Teilen: einer Board-Ansicht gruppiert nach `Phase`, einer Formel-Eigenschaft `Gewichteter Wert` und der Berechnung „Summe“ je Spalte. Die Board-Ansicht entsteht über das Layout-Menü der Datenbank:
 
@@ -95,7 +95,7 @@ _Quelle: Notion-Hilfe, „Formulas“ (https://www.notion.com/help/formulas), Sc
 - Zur offenen Pipeline zählen nur die Phasen Qualifiziert bis Verhandlung. Gewonnene Deals sind schon Umsatz, verlorene sind weg.
 - Ohne Filter summiert Notion alle 60 Deals; die gewonnenen gehen dann mit 100 % in den gewichteten Wert ein.
 - Filter für offene Deals: „Filter“ → `Phase` → „ist nicht“ (Is not) → Gewonnen und Verloren.
-- Zahlen rechnet die Formel in Notion. Eine KI kommentiert sie ab Modul 5, rechnet sie aber nicht verlässlich selbst nach (Lab 1.2).
+- Zahlen rechnet die Formel in Notion. Eine KI kommentiert sie ab Modul 5, rechnet sie aber nicht verlässlich selbst nach ([Lab 3.3](../m03-lead-generation/l03-lead-scoring.md)).
 - Jede Auswertung ist nur so gut wie die Felder: Fehlen Phase, Wert oder Datum, fehlt der Deal in der Prognose.
 
 ## Übung: Pipeline-Board mit gewichteter Summe

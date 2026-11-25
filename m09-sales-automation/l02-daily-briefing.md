@@ -65,7 +65,7 @@ Die Ausnahme ist begründet: Das Briefing braucht ohnehin alle offenen Deals (La
 
 ## Zeitplan-Auslöser für werktags 08:00
 
-![n8n-Knotenfenster „Schedule Trigger“: Hinweis, dass der Workflow nach dem Veröffentlichen nach Zeitplan läuft; darunter Trigger Rules mit Trigger Interval „Days“, Days Between Triggers 1, Trigger at Hour „8am“ hervorgehoben, Trigger at Minute 0](https://raw.githubusercontent.com/n8n-io/n8n-docs/main/docs/get-started/.gitbook/assets/build-your-first-workflow-optional-02-01.png)
+![n8n-Knotenfenster „Schedule Trigger“: Hinweis, dass der Workflow nach dem Veröffentlichen nach Zeitplan läuft; darunter Trigger Rules mit Trigger Interval „Days“, Days Between Triggers 1, Trigger at Hour „8am“ hervorgehoben, Trigger at Minute 0](https://raw.githubusercontent.com/n8n-io/n8n-docs/main/docs/get-started/.gitbook/assets/build-your-first-workflow-optional-02-02.png)
 _Quelle: n8n Docs, „Build your first workflow“ (https://docs.n8n.io/build-your-first-workflow), © n8n, abgerufen am 23.11.2026._
 
 Das Bild zeigt das Intervall „Days“ (jeden Tag). Für werktags wird „Weeks“ gewählt, weil nur dort Wochentage auswählbar sind: Weeks Between Triggers `1`, Trigger on Weekdays Montag bis Freitag, Trigger at Hour `8am`, Minute `0`. Quelle: [n8n Docs – Schedule Trigger](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.scheduletrigger). Die Uhrzeit gilt in der Zeitzone des Workflows (Workflow-Menü ⋯ → Settings → Timezone). Ist weder dort noch für die Instanz eine Zeitzone gesetzt, nimmt n8n New York (Stand 22.11.2026, Quelle: [n8n Docs – Workflow settings](https://docs.n8n.io/build/manage-workflows/configure-workflow-settings)); für den Kurs `Europe/Berlin` wählen.

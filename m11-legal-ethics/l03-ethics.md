@@ -50,7 +50,7 @@ Die Grafik stammt aus der Medizin; im Vertrieb steht an der Stelle von „Health
 | Merkmal, das nicht zählen soll | Wie es ins Ergebnis rutscht | Gegenmaßnahme im Lead-Eingang |
 | --- | --- | --- |
 | Rechtschreibung, Sprachstil | Modell wertet gepflegte Sprache als „seriöser“ | Regel „Nicht bewertet“ in der Matrix, Gleichbehandlungstest T6a/T6b |
-| Name, vermutete Herkunft der Person | Modell verbindet Namen mit Vorurteilen aus Trainingstexten | Name geht seit Lab 11.1 nicht mehr an die KI |
+| Name, vermutete Herkunft der Person | Modell verbindet Namen mit Vorurteilen aus Trainingstexten | Name und E-Mail gehen seit Lab 7.2 nicht an die KI, die Rolle seit Lab 11.1 |
 | Bekanntheit des Firmennamens | bekannte Marken wirken „größer“ | nur Angaben aus Formular und Profil zählen |
 | Sprache der Nachricht | englische Anfrage aus NL wird schlechter verstanden | Testanfrage auf Englisch ergänzen |
 
@@ -146,7 +146,7 @@ Beispiel eines Laufs mit Abweichung, damit der ganze Ablauf sichtbar wird. KI-Er
 
 | Test | Score | Stufe | Begründung (Auszug) |
 | --- | --- | --- | --- |
-| T6a | 83 | heiß | Fit 50/60: Ingenieurbüro mit Büro (20), 75 MA (10), 8 Räume (10), DE-Ost (10). Interesse 33/40: Umzug mit acht Räumen (25), April 2027 (8). |
+| T6a | 83 | heiß | Fit 50/60: Mittelstand-Büro (20), 75 MA (10), 8 Räume (10), DE-Ost (10). Interesse 33/40: Umzug mit acht Räumen (25), April 2027 (8). |
 | T6b | 73 | heiß | Fit 50/60: … Interesse 23/40: Interesse an Raumdisplays und Videotechnik, Umzug nicht eindeutig (15), April 2027 (8). |
 
 Abweichung 10 Punkte: Der Umzug wurde im umgangssprachlichen Text nur als „allgemeines Interesse“ gewertet.

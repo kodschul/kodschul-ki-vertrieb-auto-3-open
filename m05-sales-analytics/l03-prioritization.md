@@ -76,8 +76,10 @@ Dringlichkeit entscheidet die Reihenfolge innerhalb eines Feldes.
 
 Die Top 5 bekommen in Notion ein Häkchen in der Eigenschaft „Diese Woche“; eine gefilterte Ansicht zeigt nur diese Einträge. In `Leads` gibt es die Spalte seit dem Import aus Lab 4.1 (Typ auf Kontrollkästchen stellen, falls noch Text, siehe [`notion-import-anleitung.md`](../material/notion/notion-import-anleitung.md)); in `Deals` wird sie neu angelegt.
 
-![Notion-Datenbank „Engineering tasks“ mit Ansichten-Reitern „All Tasks“, „By Status“, „Assigned to Me“, rechts Symbole für Filter und Sortierung und das geöffnete Menü „Layout“ mit Table, Board, Timeline, Calendar, List, Gallery](https://images.ctfassets.net/spoqsaf9291f/nfJxbTGWexijW7BSAEPZL/a39afeb87300553e7fb97fc7006d320d/layouts.png)
-_Quelle: Notion Help Center, „Views, filters, sorts & groups“ (https://www.notion.com/help/views-filters-and-sorts), © Notion Labs, abgerufen am 23.11.2026._
+![Notion-Filterfenster „Filters for Mary's High Priority Tasks“: Filterzeilen nach dem Muster „Where – Eigenschaft – Is – Wert“, z. B. „Where Engineers Contains Mary Cassatt“, darunter mit „And“ und „Or“ verknüpfte Filtergruppen (Type is Task oder Bug; Priority is P1) und jeweils „+ Add a filter“](https://images.ctfassets.net/spoqsaf9291f/Z8Ab1rCZgvHAPn8MWRhal/ddb5b31d145492ebe218b7e3079e19e2/nested-filters.png)
+_Quelle: Notion Help Center, „Using advanced database filters“ (https://www.notion.com/help/guides/using-advanced-database-filters), © Notion Labs, abgerufen am 23.11.2026._
+
+Für die Wochenliste genügt eine einzige Filterzeile: `Diese Woche` → **ist angehakt** (Checked).
 
 Jede Ansicht hat eigene Filter und Sortierungen; dieselben Daten erscheinen so einmal vollständig („Pipeline“) und einmal als Wochenliste („Diese Woche“). Neue Eigenschaften entstehen über **Eigenschaften** → **Neue Eigenschaft** (Bezeichnung je nach Version):
 
@@ -131,7 +133,7 @@ Berechnet mit den Regeln der Prompt-Karte aus [`nordwind-deals.csv`](../material
 
 Plätze 6 bis 8 (je 12 Punkte): Lindgrün Energie (Angebot, 63.049 €, 29.01.2027), Brandt Maschinenbau (Demo, 52.184 €, 26.02.2027), Marquardt & Lenz Rechtsanwälte (Demo, 23.865 €, seit 50 Tagen kein Kontakt).
 
-Bester Lead: Rheinpark Versicherungsmakler mit 1 × 2 × 3 = 6 (heiß, 12 Räume ≈ 22.800 €, Lieferung bis Mitte Dezember gewünscht). Deals in Verhandlung liegen vorn, weil dort Chance und Wert schon belegt sind; der heiße Lead gehört trotzdem in die Woche, wenn Zeit bleibt.
+Bester Lead: Rheinpark Versicherungsmakler mit 1 × 2 × 2 = 4 (heiß, 12 Räume ≈ 22.800 €, neue Räume ab Februar 2027). Deals in Verhandlung liegen vorn, weil dort Chance und Wert schon belegt sind; der heiße Lead gehört trotzdem in die Woche, wenn Zeit bleibt.
 
 Nachrechnung Rheinfels Logistik: Chance 2 (Angebot versendet) × Wert 3 (54.394 € ≥ 50.000 €) × Dringlichkeit 3 (Abschlussdatum überschritten) = 18.
 

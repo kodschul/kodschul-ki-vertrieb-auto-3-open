@@ -105,7 +105,7 @@ _Quelle: Notion-Hilfe, „Import data into Notion“ (https://www.notion.com/hel
 
 ## Übung: Datenbank Leads importieren und sortieren
 
-**Material:** [`leads-start.csv`](../material/notion/leads-start.csv) (11 Leads, 29 Spalten), Anleitung [`notion-import-anleitung.md`](../material/notion/notion-import-anleitung.md) · **Werkzeug:** Notion im Browser
+**Material:** [`leads-start.csv`](../material/notion/leads-start.csv) (11 Leads, 30 Spalten), Anleitung [`notion-import-anleitung.md`](../material/notion/notion-import-anleitung.md) · **Werkzeug:** Notion im Browser
 
 **Ausgangslage:** Die bewerteten Leads aus Modul 3 sollen dort stehen, wo das ganze Team sie findet. Die Startdatei enthält die zehn Muster-Leads mit Score, Stufe und Begründung sowie den Lead Rheinpark aus einer Empfehlung; Spalten für spätere Labs sind noch leer. Alle arbeiten ab hier mit derselben Startdatei, damit Auswertungen, Workflows und Musterergebnisse an Tag 2 und 3 für alle dieselben Leads und Zahlen zeigen; die eigene `leads.csv` aus Lab 3.3 kommt über die Erweiterung dazu.
 
@@ -115,7 +115,7 @@ _Quelle: Notion-Hilfe, „Import data into Notion“ (https://www.notion.com/hel
 4. Sortiere die Tabelle: „Sortieren“ (Sort) → `Score` → „Absteigend“ (Descending).
 5. Öffne den Eintrag „Rheinpark Versicherungsmakler GmbH“ als Seite und prüfe Score, Stufe, Begründung und Status.
 
-Bezeichnungen je nach Version; die vollständige Typtabelle mit allen 29 Eigenschaften steht in der [Importanleitung](../material/notion/notion-import-anleitung.md). Für dieses Lab genügen:
+Bezeichnungen je nach Version; die vollständige Typtabelle mit allen 30 Eigenschaften steht in der [Importanleitung](../material/notion/notion-import-anleitung.md). Für dieses Lab genügen:
 
 | Eigenschaft | Typ | Optionen bzw. Hinweis |
 | --- | --- | --- |
@@ -124,6 +124,7 @@ Bezeichnungen je nach Version; die vollständige Typtabelle mit allen 29 Eigensc
 | `Stufe` | Auswählen (Select) | heiß, warm, kalt |
 | `Status` | Auswählen (Select) | Neu, Prüfen, Heiß, Später pflegen, Gespräch geführt, Kein Fit; nach dem Import existiert nur „Neu“, die übrigen fünf von Hand ergänzen |
 | `Segment`, `Region`, `Quelle` | Auswählen (Select) | Optionen laut Importanleitung (z. B. „Sonstige“ bei Region ergänzen) |
+| `Diese Woche`, `KI-gestützt`, `Einwilligung Werbung` | Kontrollkästchen (Checkbox) | bleiben vorerst leer; Bedeutung folgt in den Labs, die sie nutzen |
 
 Die Schreibweise der Optionen muss exakt stimmen: Die Workflows ab Tag 2 schreiben genau diese Werte.
 
@@ -145,7 +146,7 @@ Datenbank `Leads` in „Nordwind CRM“, Ansicht „Tabelle“ (Table), sortiert
 | Rheinpark Versicherungsmakler GmbH | Mittelstand-Büro | DE-West | 100 | heiß | Neu |
 | Brenner & Voss Rechtsanwälte PartG mbB | Kanzleien und Beratungen | DE-West | 95 | heiß | Neu |
 | Hafenkontor Logistik GmbH | Mittelstand-Büro | DE-Nord | 93 | heiß | Neu |
-| Vogelsang Medizintechnik GmbH | Mittelstand-Büro | DE-Süd | 80 | heiß | Neu |
+| Vogelsang Medizintechnik GmbH | Mittelstand-Büro | DE-Süd | 75 | heiß | Neu |
 | Grachtenwerk Coworking B.V. | Coworking und Flexible Office | NL | 66 | warm | Neu |
 | Limmat Treuhand AG | Kanzleien und Beratungen | CH | 65 | warm | Neu |
 | Lechfeld Stahlhandel GmbH | Mittelstand-Büro | DE-Süd | 59 | warm | Neu |
@@ -162,7 +163,7 @@ Datenbank `Leads` in „Nordwind CRM“, Ansicht „Tabelle“ (Table), sortiert
 | E-Mail | m.yilmaz@rheinpark-makler.example |
 | Quelle | Empfehlung |
 | Score / Stufe | 100 / heiß |
-| Begründung | Fit 60/60: Büro-Unternehmen (20), 120 MA (10), 12 Räume (15), DE-West (15). Interesse 40/40: neue Räume und Doppelbuchungen (25), Lieferung bis Mitte Dezember gewünscht (15). |
+| Begründung | Fit 60/60: Büro-Unternehmen (20), 120 MA (10), 12 Räume (15), DE-West (15). Interesse 40/40: laut Empfehlung drei neue Räume und Doppelbuchungen (25), neue Räume ab Februar 2027 innerhalb von 3 Monaten (15). |
 | Status | Neu |
 | Nächster Schritt, Bedarf, Budget, Entscheider, Zeitrahmen | leer (folgt in Lab 4.3) |
 
